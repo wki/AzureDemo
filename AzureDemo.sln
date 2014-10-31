@@ -15,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1FF571
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DddSkeleton", "DddSkeleton\DddSkeleton.csproj", "{457DD21B-649F-43DE-B6A3-164F5314EDEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticsCollector", "StatisticsCollector\StatisticsCollector.csproj", "{D12631D2-2E5B-4FAE-959B-E9433FB1D21A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +33,14 @@ Global
 		{1A41E2EC-1451-4554-AB8D-8A74A142105C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A41E2EC-1451-4554-AB8D-8A74A142105C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A41E2EC-1451-4554-AB8D-8A74A142105C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{457DD21B-649F-43DE-B6A3-164F5314EDEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{457DD21B-649F-43DE-B6A3-164F5314EDEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{457DD21B-649F-43DE-B6A3-164F5314EDEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{457DD21B-649F-43DE-B6A3-164F5314EDEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D12631D2-2E5B-4FAE-959B-E9433FB1D21A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D12631D2-2E5B-4FAE-959B-E9433FB1D21A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D12631D2-2E5B-4FAE-959B-E9433FB1D21A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D12631D2-2E5B-4FAE-959B-E9433FB1D21A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
