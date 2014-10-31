@@ -18,7 +18,7 @@ namespace StatisticsCollector.Common
             parts = name.Split(delimiter.ToCharArray());
 
             if (parts.Length != 3)
-                throw new InvalidOperationException("not three parts in name");
+                throw new ArgumentException("not three parts in name");
         }
     }
 }
