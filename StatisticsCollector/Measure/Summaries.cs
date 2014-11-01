@@ -3,8 +3,6 @@ using StatisticsCollector.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StatisticsCollector.Measure
 {
@@ -44,6 +42,13 @@ namespace StatisticsCollector.Measure
 
         public void AddMeasurement(Measurement measurement)
         {
+            var summary = GetOrCreateSummary(measurement);
+            summary.AddResult(measurement.Result);
+            EnsureMaxAmountNotExceeded();
+        }
+
+        private Summary GetOrCreateSummary(Measurement measurement)
+        {
             var summary = GetSummaryForTime(measurement.MeasuredOn);
             if (summary == null)
             {
@@ -54,13 +59,19 @@ namespace StatisticsCollector.Measure
                 var to = from + Interval;
 
                 summary = new Summary(Id, from, to);
-                
+
                 Collection.Insert(0, summary);
             }
 
-            summary.AddResult(measurement.Result);
+            return summary;
+        }
 
-            // TODO: handle rotation
+        private void EnsureMaxAmountNotExceeded()
+        {
+            if (Collection.Count > MaxAmount)
+            {
+                Collection.RemoveRange(MaxAmount, Collection.Count - MaxAmount);
+            }
         }
     }
 }
