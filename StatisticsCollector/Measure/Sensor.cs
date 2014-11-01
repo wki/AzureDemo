@@ -14,19 +14,19 @@ namespace StatisticsCollector.Measure
         public Measurement LatestMeasurement { get; private set; }
         public AlarmInfo AlarmInfo { get; private set; }
 
-        void ProvideResult(int result)
+        public Sensor(SensorId id): base(id) {}
+
+        public void ProvideResult(int result)
         {
             var measurement = new Measurement(result);
             ProvideMeasurement(measurement);
         }
 
-        void ProvideMeasurement(Measurement measurement)
+        private void ProvideMeasurement(Measurement measurement)
         {
             LatestMeasurement = measurement;
 
-            // type cannot get inferred -- why?
-            // this.Publish(
-            this.Publish<MeasurementProvided>(
+            this.Publish(
                 new MeasurementProvided
                 {
                     SensorId = Id,

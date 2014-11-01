@@ -51,6 +51,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Common\AlarmInfoTest.cs" />
+    <Compile Include="FakeHub.cs" />
+    <Compile Include="Measure\SensorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\SensorIdTest.cs" />
   </ItemGroup>

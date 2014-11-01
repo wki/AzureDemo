@@ -19,7 +19,8 @@ namespace DddSkeleton.EventBus
         public static ILog Log = LogManager.GetCurrentClassLogger();
         private readonly IWindsorContainer container;
 
-        public static IHub Current { get; private set; }
+        // tests must be able to set it.
+        public static IHub Current { get; set; }
 
         public Hub(IWindsorContainer container)
         {
