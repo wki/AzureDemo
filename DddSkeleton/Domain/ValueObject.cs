@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DddSkeleton.Domain
 {
-    class ValueObject : DomainObject
+    public class ValueObject : DomainObject
     {
         public ValueObject()
         { }

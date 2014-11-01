@@ -39,13 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\AlarmInfo.cs" />
     <Compile Include="Common\SensorId.cs" />
+    <Compile Include="Measure\IAllSensors.cs" />
+    <Compile Include="Measure\Measurement.cs" />
+    <Compile Include="Measure\MeasurementProvided.cs" />
+    <Compile Include="Measure\Sensor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Alarm\" />
     <Folder Include="App\" />
-    <Folder Include="Measure\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DddSkeleton\DddSkeleton.csproj">
