@@ -6,6 +6,6 @@ namespace StatisticsCollector.Measure
     {
         Summaries HourlyBySensorId(SensorId sensorId);
         Summaries DailyBySensorId(SensorId sensorId);
-        void Save(Summary summary);
+        void Save(Summaries summaries);
     }
 }
