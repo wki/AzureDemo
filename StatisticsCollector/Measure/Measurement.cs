@@ -12,10 +12,12 @@ namespace StatisticsCollector.Measure
         public int Result { get; private set; }
         public DateTime MeasuredOn { get; private set; }
 
-        public Measurement(int result)
+        public Measurement(int result): this(result, DateTime.Now) {}
+
+        public Measurement(int result, DateTime measuredOn)
         {
             Result = result;
-            MeasuredOn = DateTime.Now;
+            MeasuredOn = measuredOn;
         }
     }
 }

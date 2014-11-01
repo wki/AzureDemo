@@ -42,9 +42,13 @@
     <Compile Include="Common\AlarmInfo.cs" />
     <Compile Include="Common\SensorId.cs" />
     <Compile Include="Measure\IAllSensors.cs" />
+    <Compile Include="Measure\ISensorCreator.cs" />
     <Compile Include="Measure\Measurement.cs" />
     <Compile Include="Measure\MeasurementProvided.cs" />
     <Compile Include="Measure\Sensor.cs" />
+    <Compile Include="Measure\SensorCreator.cs" />
+    <Compile Include="Measure\Summaries.cs" />
+    <Compile Include="Measure\Summary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
