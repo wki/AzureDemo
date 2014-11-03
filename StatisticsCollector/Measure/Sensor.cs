@@ -11,6 +11,11 @@ namespace StatisticsCollector.Measure
         public AlarmInfo AlarmInfo { get; private set; }
 
         public Sensor(SensorId id): base(id) {}
+        public Sensor(SensorId id, Measurement latestMeasurement, AlarmInfo alarmInfo): base(id)
+        {
+            LatestMeasurement = latestMeasurement;
+            AlarmInfo = alarmInfo;
+        }
 
         public void ProvideResult(int result)
         {

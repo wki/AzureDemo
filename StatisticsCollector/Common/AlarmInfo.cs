@@ -8,7 +8,6 @@ namespace StatisticsCollector.Common
         public DateTime RaisedOn { get; private set; }
         public DateTime? ClearedOn { get; private set; }
         public string Message { get; private set; }
-        public bool IsCleared { get { return ClearedOn != null; } }
 
         private AlarmInfo() {}
 
@@ -27,5 +26,11 @@ namespace StatisticsCollector.Common
                 Message = this.Message
             };
         }
+
+        public bool IsCleared()
+        { 
+            return ClearedOn != null;
+        }
+
     }
 }
