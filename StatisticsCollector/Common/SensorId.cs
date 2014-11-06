@@ -1,5 +1,6 @@
 ﻿using DddSkeleton.Domain;
 using System;
+using System.Linq;
 
 namespace StatisticsCollector.Common
 {
