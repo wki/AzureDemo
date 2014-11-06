@@ -6,7 +6,7 @@ namespace StatisticsCollector.Common
 {
     public class SensorId: ValueObject
     {
-        string[] parts;
+        private string[] parts;
 
         public SensorId(string name): this(name, "/") {}
 
@@ -18,7 +18,8 @@ namespace StatisticsCollector.Common
                 throw new ArgumentException("not three parts in name");
         }
 
-        public string Name { 
+        // this one will be serialized by NewtonSoft.JSON
+        public string Name {
             get { return DelimitedBy("/"); }
         }
 
