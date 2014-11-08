@@ -52,12 +52,11 @@
     <Compile Include="Measure\Summaries.cs" />
     <Compile Include="Measure\SummariesCreator.cs" />
     <Compile Include="Measure\Summary.cs" />
-    <Compile Include="Measure\SummaryAggregator.cs" />
+    <Compile Include="App\SummaryAggregator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Alarm\" />
-    <Folder Include="App\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DddSkeleton\DddSkeleton.csproj">

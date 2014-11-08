@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StatisticsCollector.Measure;
 
-namespace StatisticsCollector.Measure
+namespace StatisticsCollector.App
 {
     public class SummaryAggregator: IService, ISubscribe<MeasurementProvided>
     {

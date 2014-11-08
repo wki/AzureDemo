@@ -8,13 +8,20 @@ using System.Linq;
 
 namespace StatisticsCollector.Repositories.AzureFile
 {
-    using LatestMeasurements = Dictionary<SensorId, Measurement>;
-    using RaisedAlarms = Dictionary<SensorId, AlarmInfo>;
+    /// <summary>
+    /// Saves and retrieves files for sensors on an Anzure File Storage
+    /// 
+    /// Every sensor has a file for holding its summaries
+    /// 
+    /// A file holds all latest measurements for all sensors
+    /// 
+    /// A file holds all raised alarms for all sensors (if any)
+    /// </summary>
 
     public class AllSensors : IAllSensors, IRepository
     {
-        private static const string LATEST_MEASUREMENTS_FILE = "latest_measurements.json";
-        private static const string RAISED_ALARMS_FILE = "raised_alarms.json";
+        private static readonly string LATEST_MEASUREMENTS_FILE = "latest_measurements.json";
+        private static readonly string RAISED_ALARMS_FILE = "raised_alarms.json";
 
         public IEnumerable<Sensor> Filtered(string mask)
         {

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <!-- TODO: add key and rename file to app.config -->
+  <appSettings>
+    <add key="StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=wkstatdev;AccountKey=" />
+    <add key="StorageShare" value="test" />
+  </appSettings>
+</configuration>

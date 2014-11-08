@@ -18,7 +18,7 @@ namespace StatisticsCollector.Tests.Common
         [TestMethod]
         public void AlarmInfo_ConstructedAlarmNotCleared()
         {
-            Assert.IsFalse(alarmInfo.IsCleared);
+            Assert.IsFalse(alarmInfo.IsCleared());
         }
 
         [TestMethod]
@@ -32,7 +32,7 @@ namespace StatisticsCollector.Tests.Common
         [TestMethod]
         public void AlarmInfo_Clear_IsCleared()
         {
-            Assert.IsTrue(alarmInfo.Clear().IsCleared);
+            Assert.IsTrue(alarmInfo.Clear().IsCleared());
         }
     }
 }

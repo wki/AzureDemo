@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticsCollector.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticsCollector.Repositories.AzureFile", "StatisticsCollector.Repositories.AzureFile\StatisticsCollector.Repositories.AzureFile.csproj", "{2FFBB456-6C92-4F04-8525-B03D82943901}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticsCollector.Repositories.AzureFile.Tests", "StatisticsCollector.Repositories.AzureFile.Tests\StatisticsCollector.Repositories.AzureFile.Tests.csproj", "{8DE1BADA-B17A-4914-8832-9D543FDA90C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{2FFBB456-6C92-4F04-8525-B03D82943901}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FFBB456-6C92-4F04-8525-B03D82943901}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FFBB456-6C92-4F04-8525-B03D82943901}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DE1BADA-B17A-4914-8832-9D543FDA90C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DE1BADA-B17A-4914-8832-9D543FDA90C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DE1BADA-B17A-4914-8832-9D543FDA90C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DE1BADA-B17A-4914-8832-9D543FDA90C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
