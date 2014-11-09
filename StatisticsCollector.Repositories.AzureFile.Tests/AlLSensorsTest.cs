@@ -38,6 +38,17 @@ namespace StatisticsCollector.Repositories.AzureFile.Tests
         [TestMethod]
         public void AllSensors_Filtered_Returns2SensorsFromMeasurements()
         {
+            // FIXME: serialisierung erzeugt falsche Schlüssel
+            // {
+            // "StatisticsCollector.Common.SensorId": {
+            //     "Result": 42,
+            //     "MeasuredOn": "2014-11-09T13:14:34.2395272+01:00"
+            // },
+            // "StatisticsCollector.Common.SensorId": {
+            //     "Result": 13,
+            //     "MeasuredOn": "2014-11-09T13:14:34.2395272+01:00"
+            // }
+}
             // Arrange
             var latestMeasurements = new LatestMeasurements();
             latestMeasurements.Add(new SensorId("a/b/c"), new Measurement(42));

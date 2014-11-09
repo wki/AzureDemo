@@ -15,10 +15,6 @@ namespace StatisticsCollector.Repositories.AzureFile.Tests
         public void PrepareCloudStorage()
         {
             // delete all files in root directory (Dir)
-            //Cloud.Dir
-            //    .ListFilesAndDirectories()
-            //    .ToList()
-            //    .ForEach(f => Console.WriteLine("File: {0}", f.Uri.LocalPath.Replace("/test/","")));
             Cloud.Dir
                 .ListFilesAndDirectories()
                 .ToList()
