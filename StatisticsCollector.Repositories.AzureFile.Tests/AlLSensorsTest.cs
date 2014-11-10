@@ -48,7 +48,7 @@ namespace StatisticsCollector.Repositories.AzureFile.Tests
             //     "Result": 13,
             //     "MeasuredOn": "2014-11-09T13:14:34.2395272+01:00"
             // }
-}
+            
             // Arrange
             var latestMeasurements = new LatestMeasurements();
             latestMeasurements.Add(new SensorId("a/b/c"), new Measurement(42));

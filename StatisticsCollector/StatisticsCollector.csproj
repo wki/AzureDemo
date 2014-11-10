@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Common\AlarmInfo.cs" />
     <Compile Include="Common\SensorId.cs" />
+    <Compile Include="Common\SensorIdConverter.cs" />
     <Compile Include="Measure\IAllSensors.cs" />
     <Compile Include="Measure\IAllSummaries.cs" />
     <Compile Include="Measure\ISensorCreator.cs" />

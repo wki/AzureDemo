@@ -1,9 +1,11 @@
 ﻿using DddSkeleton.Domain;
 using System;
+using System.ComponentModel;
 using System.Linq;
 
 namespace StatisticsCollector.Common
 {
+    [TypeConverter(typeof(SensorIdConverter))]
     public class SensorId: ValueObject
     {
         private string[] parts;
@@ -63,6 +65,11 @@ namespace StatisticsCollector.Common
         private bool PartMatches(string part, string mask)
         {
             return String.IsNullOrEmpty(mask) || mask == "*" || part == mask;
+        }
+
+        public override string ToString()
+        {
+            return DelimitedBy("/");
         }
     }
 }
