@@ -76,7 +76,7 @@
   <ItemGroup>
     <Compile Include="CloudTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AlLSensorsTest.cs" />
+    <Compile Include="AllSensorsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DddSkeleton\DddSkeleton.csproj">
@@ -93,8 +93,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config.template" />
     <None Include="app.config" />
+    <None Include="app.config.template" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

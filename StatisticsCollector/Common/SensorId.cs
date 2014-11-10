@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace StatisticsCollector.Common
 {
+    // type converter needed for JSON deserialization
     [TypeConverter(typeof(SensorIdConverter))]
     public class SensorId: ValueObject
     {

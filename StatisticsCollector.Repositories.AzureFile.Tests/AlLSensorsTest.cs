@@ -5,11 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.IO;
+using System.Text;
 
 namespace StatisticsCollector.Repositories.AzureFile.Tests
 {
     [TestClass]
-    public class AlLSensorsTest
+    public class AllSensorsTest
     {
         public AllSensors AllSensors { get; set; }
 
@@ -54,8 +56,29 @@ namespace StatisticsCollector.Repositories.AzureFile.Tests
             latestMeasurements.Add(new SensorId("a/b/c"), new Measurement(42));
             latestMeasurements.Add(new SensorId("d/e/f"), new Measurement(13));
 
-            Cloud.File("latest_measurements.json")
-                .UploadText(JsonConvert.SerializeObject(latestMeasurements));
+            // a more complicated serializer:
+
+            //JsonSerializer serializer = new JsonSerializer();
+            //// serializer.Converters.Add(new JavaScriptDateTimeConverter());
+            //serializer.NullValueHandling = NullValueHandling.Include;
+            //serializer.TypeNameHandling = TypeNameHandling.All;
+
+            //var jsonText = new StringBuilder();
+            //using (var jsonStream = new StringWriter(jsonText))
+            //using (var writer = new JsonTextWriter(jsonStream))
+            //{
+            //    serializer.Serialize(writer, latestMeasurements);
+
+            //    Cloud.File("latest_measurements.json")
+            //        .UploadText(jsonText.ToString());
+            //}
+
+            // simpler serializer.
+            //Cloud.File("latest_measurements.json")
+            //    .UploadText(JsonConvert.SerializeObject(latestMeasurements));
+
+            // reusing repository code
+            AllSensors.SaveLatestMeasurements(latestMeasurements);
 
             // Act
             var filtered = AllSensors.Filtered("*/*/*");

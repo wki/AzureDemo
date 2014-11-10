@@ -30,7 +30,7 @@ namespace StatisticsCollector.Repositories.AzureFile
 
             return measurements.Keys
                 .Where(s => s.MatchesMask(mask))
-                .Select(s => new Sensor(s, measurements[s], alarms[s]))
+                .Select(s => new Sensor(s, measurements[s], alarms.ContainsKey(s) ? alarms[s] : null))
                 .ToList();
         }
 
@@ -54,7 +54,8 @@ namespace StatisticsCollector.Repositories.AzureFile
 
         #region Latest Measurements
 
-        private LatestMeasurements LoadLatestMeasurements()
+        // made public to avoid repetitions in test code
+        public LatestMeasurements LoadLatestMeasurements()
         {
             LatestMeasurements latestMeasurements;
 
@@ -73,7 +74,8 @@ namespace StatisticsCollector.Repositories.AzureFile
             return latestMeasurements;
         }
 
-        private void SaveLatestMeasurements(LatestMeasurements latestMeasurements)
+        // made public to avoid repetitions in test code
+        public void SaveLatestMeasurements(LatestMeasurements latestMeasurements)
         {
             Cloud.File(LATEST_MEASUREMENTS_FILE)
                 .UploadText(JsonConvert.SerializeObject(latestMeasurements));
@@ -83,7 +85,8 @@ namespace StatisticsCollector.Repositories.AzureFile
 
         #region Alarm Info
 
-        private RaisedAlarms LoadRaisedAlarms()
+        // made public to avoid repetitions in test code
+        public RaisedAlarms LoadRaisedAlarms()
         {
             RaisedAlarms raisedAlarms;
 

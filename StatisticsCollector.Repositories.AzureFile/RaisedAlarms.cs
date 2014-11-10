@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace StatisticsCollector.Repositories.AzureFile
 {
-    class RaisedAlarms: Dictionary<SensorId, AlarmInfo>
+    public class RaisedAlarms: Dictionary<SensorId, AlarmInfo>
     {
     }
 }

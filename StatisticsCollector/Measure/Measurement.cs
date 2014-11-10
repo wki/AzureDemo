@@ -6,8 +6,10 @@ namespace StatisticsCollector.Measure
 {
     public class Measurement: ValueObject
     {
-        public int Result { get; private set; }
-        public DateTime MeasuredOn { get; private set; }
+        public int Result { get; set; }
+        public DateTime MeasuredOn { get; set; }
+
+        public Measurement(): this(0) {}
 
         public Measurement(int result): this(result, DateTime.Now) {}
 
