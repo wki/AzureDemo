@@ -7,7 +7,7 @@ namespace StatisticsCollector.Common
 {
     // type converter needed for JSON deserialization
     [TypeConverter(typeof(SensorIdConverter))]
-    public class SensorId: ValueObject
+    public class SensorId: ValueObject, IEquatable<SensorId>
     {
         private string[] parts;
 
@@ -54,10 +54,17 @@ namespace StatisticsCollector.Common
             return matches;
         }
 
-        public override bool Equals(object obj)
+        public bool Equals(SensorId other)
         {
-            return obj != null
-                && this.ToString() == obj.ToString();
+            return other != null
+                && this.ToString() == other.ToString();
+        }
+
+        public override bool Equals(object other)
+        {
+            return other is SensorId
+                ? Equals((SensorId) other)
+                : false;
         }
 
         public static bool operator ==(SensorId s1, SensorId s2)
@@ -96,5 +103,6 @@ namespace StatisticsCollector.Common
         {
             return DelimitedBy("/");
         }
+    
     }
 }
