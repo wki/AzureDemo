@@ -8,15 +8,7 @@ using System.Linq;
 
 namespace StatisticsCollector.Repositories.AzureFile
 {
-    /// <summary>
-    /// Saves and retrieves files for sensors on an Anzure File Storage
-    /// 
-    /// Every sensor has a file for holding its summaries
-    /// 
-    /// A file holds all latest measurements for all sensors
-    /// 
-    /// A file holds all raised alarms for all sensors (if any)
-    /// </summary>
+    // see README.txt for file and formats description
 
     public class AllSensors : IAllSensors, IRepository
     {
@@ -30,19 +22,32 @@ namespace StatisticsCollector.Repositories.AzureFile
 
             return measurements.Keys
                 .Where(s => s.MatchesMask(mask))
-                .Select(s => new Sensor(s, measurements[s], alarms.ContainsKey(s) ? alarms[s] : null))
+                .Select(s => BuildSensor(s, measurements, alarms))
                 .ToList();
+        }
+
+        private Sensor BuildSensor(SensorId sensorId, LatestMeasurements measurements, RaisedAlarms alarms)
+        {
+            if (!measurements.ContainsKey(sensorId))
+                return null;
+
+            return new Sensor(
+                sensorId,
+                measurements[sensorId],
+                alarms.ContainsKey(sensorId)
+                    ? alarms[sensorId]
+                    : null
+            );
         }
 
         public Sensor ById(string id)
         {
+            var sensorId = new SensorId(id);
+
             var measurements = LoadLatestMeasurements();
             var alarms = LoadRaisedAlarms();
 
-            return measurements.Keys
-                .Where(s => s.MatchesMask(id))
-                .Select(s => new Sensor(s, measurements[s], alarms[s]))
-                .FirstOrDefault();
+            return BuildSensor(sensorId, measurements, alarms);
         }
 
         public void Save(Sensor sensor)

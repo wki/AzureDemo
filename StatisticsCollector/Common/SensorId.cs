@@ -54,6 +54,30 @@ namespace StatisticsCollector.Common
             return matches;
         }
 
+        public override bool Equals(object obj)
+        {
+            return obj != null
+                && this.ToString() == obj.ToString();
+        }
+
+        public static bool operator ==(SensorId s1, SensorId s2)
+        {
+            if ((object)s1 == null && (object)s2 == null) return true;
+            if ((object)s1 == null || (object)s2 == null) return false;
+
+            return s1.ToString() == s2.ToString();
+        }
+
+        public static bool operator !=(SensorId s1, SensorId s2)
+        {
+            return !(s1 == s2);
+        }
+
+        public override int GetHashCode()
+        {
+            return ToString().GetHashCode();
+        }
+
         /*
         private bool MatchesMask(string firstMask, string middleMask, string lastMask)
         {

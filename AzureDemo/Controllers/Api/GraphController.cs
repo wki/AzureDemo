@@ -21,7 +21,7 @@ namespace AzureDemo.Controllers.Api
                 .AddSeries(
                     name: "Employee",
                     xValue: new[] {  "Peter", "Andrew", "Julie", "Mary", "Dave" },
-                    yValues: new[] { "2", "6", "4", "5", "3" });
+                    yValues: new[] { 2, 6, 4, 5, 3 });
             var image = chart.ToWebImage();
 
             var responseMessage = new HttpResponseMessage();

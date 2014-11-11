@@ -1,4 +1,5 @@
 ﻿using DddSkeleton.Domain;
+using StatisticsCollector.Common;
 using StatisticsCollector.Measure;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,12 @@ namespace StatisticsCollector.Repositories.AzureFile
 {
     public class AllSummaries: IAllSummaries, IRepository
     {
-        public Summaries HourlyBySensorId(Common.SensorId sensorId)
+        public Summaries HourlyBySensorId(SensorId sensorId)
         {
             throw new NotImplementedException();
         }
 
-        public Summaries DailyBySensorId(Common.SensorId sensorId)
+        public Summaries DailyBySensorId(SensorId sensorId)
         {
             throw new NotImplementedException();
         }

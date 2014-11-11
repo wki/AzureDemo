@@ -21,10 +21,17 @@ namespace StatisticsCollector.Repositories.AzureFile.Tests
             // delete all files in root directory (Dir)
             Cloud.Dir
                 .ListFilesAndDirectories()
-                .ToList()
-                .ForEach(f => Cloud.Dir.GetFileReference(f.ToString()).DeleteIfExists());
+                .Select(f => f.Uri.AbsolutePath.Replace("/test/", "")).ToList()
+                .ForEach(f => Cloud.Dir.GetFileReference(f).DeleteIfExists());
 
             AllSensors = new AllSensors();
+        }
+        
+        private void PrepareLatestMeasurements() {
+            var latestMeasurements = new LatestMeasurements();
+            latestMeasurements.Add(new SensorId("a/b/c"), new Measurement(42));
+            latestMeasurements.Add(new SensorId("d/e/f"), new Measurement(13));
+            AllSensors.SaveLatestMeasurements(latestMeasurements);
         }
 
         [TestMethod]
@@ -40,45 +47,8 @@ namespace StatisticsCollector.Repositories.AzureFile.Tests
         [TestMethod]
         public void AllSensors_Filtered_Returns2SensorsFromMeasurements()
         {
-            // FIXME: serialisierung erzeugt falsche Schlüssel
-            // {
-            // "StatisticsCollector.Common.SensorId": {
-            //     "Result": 42,
-            //     "MeasuredOn": "2014-11-09T13:14:34.2395272+01:00"
-            // },
-            // "StatisticsCollector.Common.SensorId": {
-            //     "Result": 13,
-            //     "MeasuredOn": "2014-11-09T13:14:34.2395272+01:00"
-            // }
-            
             // Arrange
-            var latestMeasurements = new LatestMeasurements();
-            latestMeasurements.Add(new SensorId("a/b/c"), new Measurement(42));
-            latestMeasurements.Add(new SensorId("d/e/f"), new Measurement(13));
-
-            // a more complicated serializer:
-
-            //JsonSerializer serializer = new JsonSerializer();
-            //// serializer.Converters.Add(new JavaScriptDateTimeConverter());
-            //serializer.NullValueHandling = NullValueHandling.Include;
-            //serializer.TypeNameHandling = TypeNameHandling.All;
-
-            //var jsonText = new StringBuilder();
-            //using (var jsonStream = new StringWriter(jsonText))
-            //using (var writer = new JsonTextWriter(jsonStream))
-            //{
-            //    serializer.Serialize(writer, latestMeasurements);
-
-            //    Cloud.File("latest_measurements.json")
-            //        .UploadText(jsonText.ToString());
-            //}
-
-            // simpler serializer.
-            //Cloud.File("latest_measurements.json")
-            //    .UploadText(JsonConvert.SerializeObject(latestMeasurements));
-
-            // reusing repository code
-            AllSensors.SaveLatestMeasurements(latestMeasurements);
+            PrepareLatestMeasurements();
 
             // Act
             var filtered = AllSensors.Filtered("*/*/*");
@@ -97,6 +67,39 @@ namespace StatisticsCollector.Repositories.AzureFile.Tests
                     .First(s => s.Id.ToString().Equals("d/e/f"))
                     .LatestMeasurement.Result
             );
+        }
+
+        [TestMethod]
+        public void AllSensors_ById_ReturnsNullForEmptyStorage()
+        {
+            // Assert
+            Assert.IsNull(AllSensors.ById("a/b/c"));
+        }
+
+        [TestMethod]
+        public void AllSensors_ById_ReturnsNullForUnknownId()
+        {
+            // Arrange
+            PrepareLatestMeasurements();
+
+            // Assert
+            Assert.IsNull(AllSensors.ById("x/y/z"));
+        }
+
+        [TestMethod]
+        public void AllSensors_ById_ReturnsSensorWhenKnown()
+        {
+            // Arrange
+            PrepareLatestMeasurements();
+
+            // Act
+            var sensor = AllSensors.ById("a/b/c");
+
+            // Assert
+            Assert.IsNotNull(sensor, "sensor");
+            Assert.AreEqual("a/b/c", sensor.Id.ToString(), "sensor Id");
+            Assert.AreEqual(42, sensor.LatestMeasurement.Result, "latest Measurement");
+            Assert.IsNull(sensor.AlarmInfo, "alarm Info");
         }
     }
 }
