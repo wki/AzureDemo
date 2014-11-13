@@ -7,18 +7,19 @@ namespace StatisticsCollector.Measure
     public class Summary: Entity<SensorId>
     {
         // repository must be able to set things, thus internal.
-        public DateTime From { get; internal set; }
-        public DateTime To { get; internal set; }
+        public DateTime FromIncluding { get; internal set; }
+        public DateTime ToExcluding { get; internal set; }
 
         public int Count { get; internal set; }
         public int Min { get; internal set; }
         public int Max { get; internal set; }
         public int Sum { get; internal set; }
+        public int Avg { get { return Count > 0 ? Sum / Count : 0; } }
 
         public Summary(SensorId sensorId, DateTime from, DateTime to): base(sensorId)
         {
-            From = from;
-            To = to;
+            FromIncluding = from;
+            ToExcluding = to;
             Count = 0;
         }
 
@@ -42,7 +43,7 @@ namespace StatisticsCollector.Measure
 
         public bool ContainsTime(DateTime time)
         {
-            return time >= From && time < To;
+            return time >= FromIncluding && time < ToExcluding;
         }
     }
 }

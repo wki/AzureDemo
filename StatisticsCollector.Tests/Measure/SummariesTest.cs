@@ -48,12 +48,12 @@ namespace StatisticsCollector.Tests.Measure
             var summary = HourlySummaries.Collection.First();
             Assert.AreEqual(
                 new DateTime(2014,3,5, 13,0,0),
-                summary.From,
+                summary.FromIncluding,
                 "From"
             );
             Assert.AreEqual(
                 new DateTime(2014, 3, 5, 14, 0, 0),
-                summary.To,
+                summary.ToExcluding,
                 "To"
             );
         }
