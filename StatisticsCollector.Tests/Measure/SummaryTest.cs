@@ -14,7 +14,6 @@ namespace StatisticsCollector.Tests.Measure
         public void PrepareSummary()
         {
             Summary = new Summary(
-                new SensorId("a/b/b"),
                 new DateTime(2014,3,5, 12,0,0),
                 new DateTime(2014,3,5, 13,0,0)
             );

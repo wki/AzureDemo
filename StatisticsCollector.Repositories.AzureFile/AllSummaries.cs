@@ -35,7 +35,7 @@ namespace StatisticsCollector.Repositories.AzureFile
         {
             var filename = String
                 .Join("-", sensorId.DelimitedBy("-"), summaryKind)
-                .ToLower();
+                .ToLower() + ".json";
 
             return Cloud.File(filename);
         }

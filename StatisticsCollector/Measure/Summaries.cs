@@ -56,7 +56,7 @@ namespace StatisticsCollector.Measure
                 );
                 var to = from + Interval;
 
-                summary = new Summary(Id, from, to);
+                summary = new Summary(from, to);
 
                 Collection.Insert(0, summary);
             }

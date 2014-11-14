@@ -4,19 +4,20 @@ using System;
 
 namespace StatisticsCollector.Measure
 {
-    public class Summary: Entity<SensorId>
+    // actually we are modifying this object which is not the intention
+    // for a value object.
+    public class Summary: ValueObject
     {
-        // repository must be able to set things, thus internal.
         public DateTime FromIncluding { get; internal set; }
         public DateTime ToExcluding { get; internal set; }
 
-        public int Count { get; internal set; }
-        public int Min { get; internal set; }
-        public int Max { get; internal set; }
-        public int Sum { get; internal set; }
+        public int Count { get; set; }
+        public int Min { get; set; }
+        public int Max { get; set; }
+        public int Sum { get; set; }
         public int Avg { get { return Count > 0 ? Sum / Count : 0; } }
 
-        public Summary(SensorId sensorId, DateTime from, DateTime to): base(sensorId)
+        public Summary(DateTime from, DateTime to)
         {
             FromIncluding = from;
             ToExcluding = to;
