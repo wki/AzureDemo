@@ -75,8 +75,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CloudTest.cs" />
+    <Compile Include="CloudTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AllSensorsTest.cs" />
+    <Compile Include="AllSummariesTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DddSkeleton\DddSkeleton.csproj">

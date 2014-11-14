@@ -16,7 +16,7 @@ namespace StatisticsCollector.Tests.Measure
         {
             HourlySummaries = new Summaries(
                 new SensorId("a/b/c"),
-                new TimeSpan(1, 0, 0)
+                SummaryKind.Hourly
             );
         }
 

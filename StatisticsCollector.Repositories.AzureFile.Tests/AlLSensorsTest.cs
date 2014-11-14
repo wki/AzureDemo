@@ -1,33 +1,24 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StatisticsCollector.Common;
 using StatisticsCollector.Measure;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
-using System.Text;
 
 namespace StatisticsCollector.Repositories.AzureFile.Tests
 {
     [TestClass]
-    public class AllSensorsTest
+    public class AllSensorsTest : CloudTestBase
     {
         public AllSensors AllSensors { get; set; }
 
         [TestInitialize]
-        public void PrepareCloudStorage()
+        public void Prepare()
         {
-            // delete all files in root directory (Dir)
-            Cloud.Dir
-                .ListFilesAndDirectories()
-                .Select(f => f.Uri.AbsolutePath.Replace("/test/", "")).ToList()
-                .ForEach(f => Cloud.Dir.GetFileReference(f).DeleteIfExists());
-
+            EmptyCloudStorage();
             AllSensors = new AllSensors();
         }
-        
-        private void PrepareLatestMeasurements() {
+
+        private void PrepareLatestMeasurements()
+        {
             var latestMeasurements = new LatestMeasurements();
             latestMeasurements.Add(new SensorId("a/b/c"), new Measurement(42));
             latestMeasurements.Add(new SensorId("d/e/f"), new Measurement(13));
@@ -35,7 +26,7 @@ namespace StatisticsCollector.Repositories.AzureFile.Tests
         }
 
         [TestMethod]
-        public void AllSensors_Filtered_ReturnsNothingFromEmptyDir()
+        public void Filtered_EmptyDir_EmptyList()
         {
             // Assert
             Assert.AreEqual(
@@ -45,7 +36,7 @@ namespace StatisticsCollector.Repositories.AzureFile.Tests
         }
 
         [TestMethod]
-        public void AllSensors_Filtered_Returns2SensorsFromMeasurements()
+        public void Filtered_Measurements_2Sensors()
         {
             // Arrange
             PrepareLatestMeasurements();
@@ -70,30 +61,30 @@ namespace StatisticsCollector.Repositories.AzureFile.Tests
         }
 
         [TestMethod]
-        public void AllSensors_ById_ReturnsNullForEmptyStorage()
+        public void ById_EmptyStorage_ReturnsNull()
         {
             // Assert
-            Assert.IsNull(AllSensors.ById("a/b/c"));
+            Assert.IsNull(AllSensors.ById(new SensorId("a/b/c")));
         }
 
         [TestMethod]
-        public void AllSensors_ById_ReturnsNullForUnknownId()
+        public void ById_UnknownId_ReturnsNull()
         {
             // Arrange
             PrepareLatestMeasurements();
 
             // Assert
-            Assert.IsNull(AllSensors.ById("x/y/z"));
+            Assert.IsNull(AllSensors.ById(new SensorId("x/y/z")));
         }
 
         [TestMethod]
-        public void AllSensors_ById_ReturnsSensorWhenKnown()
+        public void ById_KnownSensor_Sensor()
         {
             // Arrange
             PrepareLatestMeasurements();
 
             // Act
-            var sensor = AllSensors.ById("a/b/c");
+            var sensor = AllSensors.ById(new SensorId("a/b/c"));
 
             // Assert
             Assert.IsNotNull(sensor, "sensor");

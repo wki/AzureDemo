@@ -54,6 +54,7 @@
     <Compile Include="Measure\SummariesCreator.cs" />
     <Compile Include="Measure\Summary.cs" />
     <Compile Include="App\SummaryAggregator.cs" />
+    <Compile Include="Measure\SummaryKind.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

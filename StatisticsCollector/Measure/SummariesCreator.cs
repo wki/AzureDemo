@@ -8,17 +8,12 @@ namespace StatisticsCollector.Measure
     {
         public Summaries CreateHourlySummaries(SensorId sensorId)
         {
-            return CreateSummaries(sensorId, new TimeSpan(1,0,0));
+            return new Summaries(sensorId, SummaryKind.Hourly);
         }
 
         public Summaries CreateDailySummaries(SensorId sensorId)
         {
-            return CreateSummaries(sensorId, new TimeSpan(24, 0, 0));
-        }
-
-        private Summaries CreateSummaries(SensorId sensorId, TimeSpan interval)
-        {
-            return new Summaries(sensorId, interval);
+            return new Summaries(sensorId, SummaryKind.Daily);
         }
     }
 }

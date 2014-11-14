@@ -1,40 +1,34 @@
-﻿using StatisticsCollector.Repositories.AzureFile;
-using System;
-using System.Linq;
-//using Microsoft.WindowsAzure;
+﻿//using Microsoft.WindowsAzure;
 //using Microsoft.WindowsAzure.Storage;
 //using Microsoft.WindowsAzure.Storage.File;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace StatisticsCollector.Repositories.AzureFile.Tests
 {
     [TestClass]
-    public class CloudTest
+    public class CloudTest : CloudTestBase
     {
         [TestInitialize]
-        public void PrepareCloudStorage()
+        public void Prepare()
         {
-            // delete all files in root directory (Dir)
-            Cloud.Dir
-                .ListFilesAndDirectories()
-                .ToList()
-                .ForEach(f => Cloud.Dir.GetFileReference(f.Uri.LocalPath.Replace("/test/", "")).DeleteIfExists());
+            EmptyCloudStorage();
         }
 
         [TestMethod]
-        public void Cloud_Share_Exists()
+        public void Share_Exists_True()
         {
             Assert.IsTrue(Cloud.Share.Exists());
         }
 
         [TestMethod]
-        public void Cloud_Dir_Exists()
+        public void Dir_Exists_True()
         {
             Assert.IsTrue(Cloud.Dir.Exists());
         }
 
         [TestMethod]
-        public void Cloud_Dir_Empty()
+        public void Dir_Empty_NoFiles()
         {
             Assert.AreEqual(
                 0,
@@ -43,13 +37,13 @@ namespace StatisticsCollector.Repositories.AzureFile.Tests
         }
 
         [TestMethod]
-        public void Cloud_File_DoesNotExist()
+        public void File_MissingFile_NotExists()
         {
             Assert.IsFalse(Cloud.File("foo.txt").Exists());
         }
 
         [TestMethod]
-        public void Cloud_File_ExistsAfterCreation()
+        public void File_ExistingFile_Exists()
         {
             // Arrange
             Cloud.File("foo.txt").UploadText("hello file");

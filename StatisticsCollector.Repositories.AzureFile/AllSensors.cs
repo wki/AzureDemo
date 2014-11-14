@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using StatisticsCollector.Common;
 using StatisticsCollector.Measure;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,6 +14,14 @@ namespace StatisticsCollector.Repositories.AzureFile
         private static readonly string LATEST_MEASUREMENTS_FILE = "latest_measurements.json";
         private static readonly string RAISED_ALARMS_FILE = "raised_alarms.json";
 
+        public Sensor ById(SensorId sensorId)
+        {
+            var measurements = LoadLatestMeasurements();
+            var alarms = LoadRaisedAlarms();
+
+            return BuildSensor(sensorId, measurements, alarms);
+        }
+
         public IEnumerable<Sensor> Filtered(string mask)
         {
             var measurements = LoadLatestMeasurements();
@@ -24,6 +31,13 @@ namespace StatisticsCollector.Repositories.AzureFile
                 .Where(s => s.MatchesMask(mask))
                 .Select(s => BuildSensor(s, measurements, alarms))
                 .ToList();
+        }
+
+        public void Save(Sensor sensor)
+        {
+            var measurements = LoadLatestMeasurements();
+            measurements[sensor.Id] = sensor.LatestMeasurement;
+            SaveLatestMeasurements(measurements);
         }
 
         private Sensor BuildSensor(SensorId sensorId, LatestMeasurements measurements, RaisedAlarms alarms)
@@ -38,23 +52,6 @@ namespace StatisticsCollector.Repositories.AzureFile
                     ? alarms[sensorId]
                     : null
             );
-        }
-
-        public Sensor ById(string id)
-        {
-            var sensorId = new SensorId(id);
-
-            var measurements = LoadLatestMeasurements();
-            var alarms = LoadRaisedAlarms();
-
-            return BuildSensor(sensorId, measurements, alarms);
-        }
-
-        public void Save(Sensor sensor)
-        {
-            var measurements = LoadLatestMeasurements();
-            measurements[sensor.Id] = sensor.LatestMeasurement;
-            SaveLatestMeasurements(measurements);
         }
 
         #region Latest Measurements
@@ -86,7 +83,7 @@ namespace StatisticsCollector.Repositories.AzureFile
                 .UploadText(JsonConvert.SerializeObject(latestMeasurements));
         }
 
-        #endregion
+        #endregion Latest Measurements
 
         #region Alarm Info
 
@@ -110,7 +107,6 @@ namespace StatisticsCollector.Repositories.AzureFile
             return raisedAlarms;
         }
 
-        #endregion
-
+        #endregion Alarm Info
     }
 }
