@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\IMeasureService.cs" />
     <Compile Include="App\MeasureService.cs" />
     <Compile Include="Common\AlarmInfo.cs" />
     <Compile Include="Common\SensorId.cs" />

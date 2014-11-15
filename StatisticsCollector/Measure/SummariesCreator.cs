@@ -4,7 +4,7 @@ using System;
 
 namespace StatisticsCollector.Measure
 {
-    class SummariesCreator: ISummariesCreator, IFactory
+    public class SummariesCreator: ISummariesCreator, IFactory
     {
         public Summaries CreateHourlySummaries(SensorId sensorId)
         {

@@ -1,4 +1,5 @@
-﻿using StatisticsCollector.Common;
+﻿using DddSkeleton.Domain;
+using StatisticsCollector.Common;
 using StatisticsCollector.Measure;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StatisticsCollector.App
 {
-    public class MeasureService
+    public class MeasureService: IMeasureService, IService
     {
         public IAllSensors AllSensors { get; set; }
         public ISensorCreator SensorCreator { get; set; }

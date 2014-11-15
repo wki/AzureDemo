@@ -48,6 +48,9 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Windsor.Mvc">
+      <HintPath>..\packages\Castle.Windsor.Mvc.1.3.0.0\lib\net45\Castle.Windsor.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Common.Logging">
       <HintPath>..\packages\Common.Logging.2.2.0\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
@@ -160,6 +163,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="WebApiContrib.IoC.CastleWindsor">
+      <HintPath>..\packages\WebApiContrib.IoC.CastleWindsor.0.10.0.0\lib\net40\WebApiContrib.IoC.CastleWindsor.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -175,11 +181,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\Bootstrapper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\GraphController.cs" />
+    <Compile Include="Controllers\Api\MeasureController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -236,6 +244,20 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DddSkeleton\DddSkeleton.csproj">
+      <Project>{457dd21b-649f-43de-b6a3-164f5314edef}</Project>
+      <Name>DddSkeleton</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StatisticsCollector.Repositories.AzureFile\StatisticsCollector.Repositories.AzureFile.csproj">
+      <Project>{2ffbb456-6c92-4f04-8525-b03d82943901}</Project>
+      <Name>StatisticsCollector.Repositories.AzureFile</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StatisticsCollector\StatisticsCollector.csproj">
+      <Project>{d12631d2-2e5b-4fae-959b-e9433fb1d21a}</Project>
+      <Name>StatisticsCollector</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
