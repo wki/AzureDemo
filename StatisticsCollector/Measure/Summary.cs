@@ -8,8 +8,8 @@ namespace StatisticsCollector.Measure
     // for a value object.
     public class Summary: ValueObject
     {
-        public DateTime FromIncluding { get; internal set; }
-        public DateTime ToExcluding { get; internal set; }
+        public DateTime FromIncluding { get; set; }
+        public DateTime ToExcluding { get; set; }
 
         public int Count { get; set; }
         public int Min { get; set; }

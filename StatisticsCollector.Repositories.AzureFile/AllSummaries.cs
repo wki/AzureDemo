@@ -1,6 +1,7 @@
 ﻿using DddSkeleton.Domain;
 using Microsoft.WindowsAzure.Storage.File;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using StatisticsCollector.Common;
 using StatisticsCollector.Measure;
 using System;
@@ -27,7 +28,12 @@ namespace StatisticsCollector.Repositories.AzureFile
 
             var file = BuildCloudFile(summaries.Id, summaries.SummaryKind);
             file.UploadText(
-                JsonConvert.SerializeObject(summaries.Collection)
+                JsonConvert.SerializeObject(
+                    summaries.Collection
+                    // new IsoDateTimeConverter(),
+                    // new IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-ddThh:mm:ssZ" }
+                    // new JsonSerializerSettings { DateTimeZoneHandling = DateTimeZoneHandling.Local }
+                )
             );
         }
 
@@ -49,6 +55,9 @@ namespace StatisticsCollector.Repositories.AzureFile
             {
                 Collection = JsonConvert.DeserializeObject<List<Summary>>(
                     file.DownloadText()
+                    // new IsoDateTimeConverter(),
+                    // new IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-dd hh:mm:ss" }
+                    // new JsonSerializerSettings { DateTimeZoneHandling = DateTimeZoneHandling.Local }
                 )
             };
         }

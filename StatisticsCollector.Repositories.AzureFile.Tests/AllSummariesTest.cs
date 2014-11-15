@@ -18,10 +18,14 @@ namespace StatisticsCollector.Repositories.AzureFile.Tests
             AllSummaries = new AllSummaries();
         }
 
+        // 5.3.2014, 12:00 - 14:00 (3 summaries)
+        //   12:00: 11, 21
+        //   13:00: 12, 22
+        //   14:00: 13, 23
         private void PrepareHourlySummaries()
         {
             int count = 3;
-            DateTime start = new DateTime(2014,3,5, 12,0,0);
+            DateTime start = new DateTime(2014,3,5, 12,0,0, DateTimeKind.Local);
 
             var sensorId = new SensorId("a/b/c");
             var summaries = new Summaries(sensorId, SummaryKind.Hourly)
@@ -59,15 +63,39 @@ namespace StatisticsCollector.Repositories.AzureFile.Tests
         }
 
         [TestMethod]
-        public void HourlyBySensorId_ExistingFile_Summary()
+        public void HourlyBySensorId_ExistingFile_Summaries()
         {
             // Arrange
             PrepareHourlySummaries();
 
             // Act
-                        var summaries = AllSummaries.HourlyBySensorId(new SensorId("a/b/c"));
+            var summaries = AllSummaries.HourlyBySensorId(new SensorId("a/b/c"));
 
             // Assert
+            Assert.IsNotNull(summaries, "summaries");
+            Assert.AreEqual(3, summaries.Collection.Count(), "# summary objects");
         }
+
+        [TestMethod]
+        public void HourlyBySensorId_ExistingFile_OldestSummary()
+        {
+            // Arrange
+            PrepareHourlySummaries();
+
+            // Act
+            var summaries = AllSummaries.HourlyBySensorId(new SensorId("a/b/c"));
+
+            // Assert
+            Assert.IsNotNull(summaries, "summaries");
+            var oldest = summaries.Collection.First();
+            Assert.AreEqual(new DateTime(2014, 3, 5, 12, 0, 0), oldest.FromIncluding, "FromIncluding");
+            Assert.AreEqual(new DateTime(2014, 3, 5, 13, 0, 0), oldest.ToExcluding, "ToExcluding");
+            Assert.AreEqual(11, oldest.Min, "Min");
+            Assert.AreEqual(21, oldest.Max, "Max");
+            Assert.AreEqual(32, oldest.Sum, "Sum");
+            Assert.AreEqual(16, oldest.Avg, "Avg");
+            Assert.AreEqual(2, oldest.Count, "Count");
+        }
+
     }
 }
