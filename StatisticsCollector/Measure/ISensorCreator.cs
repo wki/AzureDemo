@@ -1,7 +1,9 @@
-﻿namespace StatisticsCollector.Measure
+﻿using StatisticsCollector.Common;
+
+namespace StatisticsCollector.Measure
 {
     public interface ISensorCreator
     {
-        Sensor CreateSensor(string sensorId);
+        Sensor CreateSensor(SensorId sensorId);
     }
 }

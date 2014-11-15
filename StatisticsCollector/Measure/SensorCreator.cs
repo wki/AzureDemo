@@ -5,9 +5,9 @@ namespace StatisticsCollector.Measure
 {
     public class SensorCreator : ISensorCreator, IFactory
     {
-        public Sensor CreateSensor(string sensorId)
+        public Sensor CreateSensor(SensorId sensorId)
         {
-            return new Sensor(new SensorId(sensorId));
+            return new Sensor(sensorId);
         }
     }
 }
