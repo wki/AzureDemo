@@ -1,17 +1,22 @@
 ﻿using DddSkeleton.Domain;
 using DddSkeleton.EventBus;
 using StatisticsCollector.Common;
-using System;
 
 namespace StatisticsCollector.Measure
 {
-    public class Sensor: AggregateRoot<SensorId>
+    public class Sensor : AggregateRoot<SensorId>
     {
         public Measurement LatestMeasurement { get; private set; }
+
         public AlarmInfo AlarmInfo { get; private set; }
 
-        public Sensor(SensorId id): base(id) {}
-        public Sensor(SensorId id, Measurement latestMeasurement, AlarmInfo alarmInfo): base(id)
+        public Sensor(SensorId id)
+            : base(id)
+        {
+        }
+
+        public Sensor(SensorId id, Measurement latestMeasurement, AlarmInfo alarmInfo)
+            : base(id)
         {
             LatestMeasurement = latestMeasurement;
             AlarmInfo = alarmInfo;

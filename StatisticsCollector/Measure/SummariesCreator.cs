@@ -1,10 +1,9 @@
 ﻿using DddSkeleton.Domain;
 using StatisticsCollector.Common;
-using System;
 
 namespace StatisticsCollector.Measure
 {
-    public class SummariesCreator: ISummariesCreator, IFactory
+    public class SummariesCreator : ISummariesCreator, IFactory
     {
         public Summaries CreateHourlySummaries(SensorId sensorId)
         {

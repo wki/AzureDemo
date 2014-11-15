@@ -1,7 +1,6 @@
-﻿using StatisticsCollector.Measure;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using StatisticsCollector.Measure;
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using StatisticsCollector.Common;
 
 namespace StatisticsCollector.Tests.Measure
 {
@@ -14,8 +13,8 @@ namespace StatisticsCollector.Tests.Measure
         public void PrepareSummary()
         {
             Summary = new Summary(
-                new DateTime(2014,3,5, 12,0,0),
-                new DateTime(2014,3,5, 13,0,0)
+                new DateTime(2014, 3, 5, 12, 0, 0),
+                new DateTime(2014, 3, 5, 13, 0, 0)
             );
         }
 
@@ -46,7 +45,7 @@ namespace StatisticsCollector.Tests.Measure
         [TestMethod]
         public void Summary_ContainsTime_BeforeFrom_False()
         {
-            Assert.IsFalse(Summary.ContainsTime(new DateTime(2014,3,5, 10,0,0)));
+            Assert.IsFalse(Summary.ContainsTime(new DateTime(2014, 3, 5, 10, 0, 0)));
         }
 
         [TestMethod]

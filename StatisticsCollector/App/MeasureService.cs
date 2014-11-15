@@ -1,19 +1,18 @@
 ﻿using DddSkeleton.Domain;
 using StatisticsCollector.Common;
 using StatisticsCollector.Measure;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StatisticsCollector.App
 {
-    public class MeasureService: IMeasureService, IService
+    public class MeasureService : IMeasureService, IService
     {
         public IAllSensors AllSensors { get; set; }
+
         public ISensorCreator SensorCreator { get; set; }
+
         public IAllSummaries AllSummaries { get; set; }
+
         public ISummariesCreator SummariesCreator { get; set; }
 
         public MeasureService(IAllSensors allSensors, ISensorCreator sensorCreator,
@@ -28,7 +27,7 @@ namespace StatisticsCollector.App
         public void ProvideResult(string sensorName, int result)
         {
             var sensorId = new SensorId(sensorName);
-            
+
             var sensor = AllSensors.ById(sensorId)
                 ?? SensorCreator.CreateSensor(sensorId);
             sensor.ProvideResult(result);

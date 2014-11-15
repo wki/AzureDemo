@@ -1,17 +1,19 @@
 ﻿using DddSkeleton.Domain;
 using System;
 using System.ComponentModel;
-using System.Linq;
 
 namespace StatisticsCollector.Common
 {
     // type converter needed for JSON deserialization
     [TypeConverter(typeof(SensorIdConverter))]
-    public class SensorId: ValueObject, IEquatable<SensorId>
+    public class SensorId : ValueObject, IEquatable<SensorId>
     {
         private string[] parts;
 
-        public SensorId(string name): this(name, "/") {}
+        public SensorId(string name)
+            : this(name, "/")
+        {
+        }
 
         public SensorId(string name, string delimiter)
         {
@@ -22,7 +24,8 @@ namespace StatisticsCollector.Common
         }
 
         // this one will be serialized by NewtonSoft.JSON
-        public string Name {
+        public string Name
+        {
             get { return DelimitedBy("/"); }
         }
 
@@ -63,7 +66,7 @@ namespace StatisticsCollector.Common
         public override bool Equals(object other)
         {
             return other is SensorId
-                ? Equals((SensorId) other)
+                ? Equals((SensorId)other)
                 : false;
         }
 
@@ -103,6 +106,5 @@ namespace StatisticsCollector.Common
         {
             return DelimitedBy("/");
         }
-    
     }
 }

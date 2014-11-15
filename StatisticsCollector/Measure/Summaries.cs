@@ -6,22 +6,24 @@ using System.Linq;
 
 namespace StatisticsCollector.Measure
 {
-    public class Summaries: AggregateRoot<SensorId>
+    public class Summaries : AggregateRoot<SensorId>
     {
         public SummaryKind SummaryKind { get; internal set; }
+
         public TimeSpan Interval { get; internal set; }
+
         public int MaxAmount { get; internal set; }
 
         // summary values. sorted descending (first value = latest)
         public List<Summary> Collection;
 
         public Summaries(SensorId sensorId, SummaryKind summaryKind)
-            :base(sensorId)
+            : base(sensorId)
         {
             SummaryKind = summaryKind;
             Interval = summaryKind == SummaryKind.Hourly
-                ? new TimeSpan(1,0,0)
-                : new TimeSpan(24,0,0);
+                ? new TimeSpan(1, 0, 0)
+                : new TimeSpan(24, 0, 0);
             MaxAmount = summaryKind == SummaryKind.Hourly
                 ? 48
                 : 400;

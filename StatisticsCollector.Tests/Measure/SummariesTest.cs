@@ -1,8 +1,8 @@
-﻿using StatisticsCollector.Common;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using StatisticsCollector.Common;
 using StatisticsCollector.Measure;
 using System;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace StatisticsCollector.Tests.Measure
 {
@@ -29,13 +29,13 @@ namespace StatisticsCollector.Tests.Measure
         [TestMethod]
         public void Summaries_GetSummaryForTime_InitiallyReturnsNull()
         {
-            Assert.IsNull(HourlySummaries.GetSummaryForTime(new DateTime(2014,3,5, 13,0,0)));
+            Assert.IsNull(HourlySummaries.GetSummaryForTime(new DateTime(2014, 3, 5, 13, 0, 0)));
         }
 
         [TestMethod]
         public void Summaries_AddMeasurement_InsertsSummary()
         {
-            HourlySummaries.AddMeasurement(m(42, 13,23));
+            HourlySummaries.AddMeasurement(m(42, 13, 23));
 
             Assert.AreEqual(1, HourlySummaries.Collection.Count);
         }
@@ -47,7 +47,7 @@ namespace StatisticsCollector.Tests.Measure
 
             var summary = HourlySummaries.Collection.First();
             Assert.AreEqual(
-                new DateTime(2014,3,5, 13,0,0),
+                new DateTime(2014, 3, 5, 13, 0, 0),
                 summary.FromIncluding,
                 "From"
             );
@@ -78,7 +78,7 @@ namespace StatisticsCollector.Tests.Measure
 
         private Measurement m(int result, int hour, int minute)
         {
-            return new Measurement(result, new DateTime(2014,3,5, hour,minute,0));
+            return new Measurement(result, new DateTime(2014, 3, 5, hour, minute, 0));
         }
     }
 }

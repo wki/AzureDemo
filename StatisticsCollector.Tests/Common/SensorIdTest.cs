@@ -1,6 +1,6 @@
-﻿using StatisticsCollector.Common;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using StatisticsCollector.Common;
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace StatisticsCollector.Tests.Common
 {
@@ -41,7 +41,7 @@ namespace StatisticsCollector.Tests.Common
         {
             Assert.IsTrue(sensorId.MatchesMask(null));
         }
-        
+
         [TestMethod]
         public void SensorId_MatchesMask_EmptyString_Matches()
         {
@@ -53,7 +53,7 @@ namespace StatisticsCollector.Tests.Common
         {
             Assert.IsTrue(sensorId.MatchesMask("erlangen"));
         }
-        
+
         [TestMethod]
         public void SensorId_MatchesMask_OnePartDifferent_DoesNotMatch()
         {

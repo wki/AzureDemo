@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Helpers;
@@ -20,7 +17,7 @@ namespace AzureDemo.Controllers.Api
                 .AddTitle("Chart Title")
                 .AddSeries(
                     name: "Employee",
-                    xValue: new[] {  "Peter", "Andrew", "Julie", "Mary", "Dave" },
+                    xValue: new[] { "Peter", "Andrew", "Julie", "Mary", "Dave" },
                     yValues: new[] { 2, 6, 4, 5, 3 });
             var image = chart.ToWebImage();
 

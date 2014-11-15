@@ -25,18 +25,18 @@ namespace StatisticsCollector.Repositories.AzureFile.Tests
         private void PrepareHourlySummaries()
         {
             int count = 3;
-            DateTime start = new DateTime(2014,3,5, 12,0,0, DateTimeKind.Local);
+            DateTime start = new DateTime(2014, 3, 5, 12, 0, 0, DateTimeKind.Local);
 
             var sensorId = new SensorId("a/b/c");
             var summaries = new Summaries(sensorId, SummaryKind.Hourly)
             {
                 Collection = Enumerable.Range(1, count)
                     .Select(
-                        i => new Summary(start.AddHours(i-1), start.AddHours(i))
+                        i => new Summary(start.AddHours(i - 1), start.AddHours(i))
                             {
-                                Min = 10+i,
-                                Max = 20+i,
-                                Sum = 10+20+i+i,
+                                Min = 10 + i,
+                                Max = 20 + i,
+                                Sum = 10 + 20 + i + i,
                                 Count = 2
                             }
                     )
@@ -96,6 +96,5 @@ namespace StatisticsCollector.Repositories.AzureFile.Tests
             Assert.AreEqual(16, oldest.Avg, "Avg");
             Assert.AreEqual(2, oldest.Count, "Count");
         }
-
     }
 }

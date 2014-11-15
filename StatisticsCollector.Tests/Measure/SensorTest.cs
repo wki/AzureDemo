@@ -1,9 +1,7 @@
-﻿using StatisticsCollector.Tests;
-using System;
+﻿using DddSkeleton.EventBus;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using StatisticsCollector.Measure;
-using DddSkeleton.EventBus;
 using StatisticsCollector.Common;
+using StatisticsCollector.Measure;
 
 namespace StatisticsCollector.Tests.Measure
 {
@@ -11,6 +9,7 @@ namespace StatisticsCollector.Tests.Measure
     public class SensorTest
     {
         public FakeHub Hub { get; set; }
+
         public Sensor Sensor { get; set; }
 
         [TestInitialize]
@@ -34,7 +33,7 @@ namespace StatisticsCollector.Tests.Measure
             Sensor.ProvideResult(32);
 
             Assert.IsInstanceOfType(
-                Hub.LastMessagePublished, 
+                Hub.LastMessagePublished,
                 typeof(MeasurementProvided)
             );
             Assert.AreEqual(

@@ -1,7 +1,6 @@
 ﻿using DddSkeleton.Domain;
 using Microsoft.WindowsAzure.Storage.File;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using StatisticsCollector.Common;
 using StatisticsCollector.Measure;
 using System;

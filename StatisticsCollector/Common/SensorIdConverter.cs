@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace StatisticsCollector.Common
 {
-    class SensorIdConverter: TypeConverter
+    internal class SensorIdConverter : TypeConverter
     {
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {

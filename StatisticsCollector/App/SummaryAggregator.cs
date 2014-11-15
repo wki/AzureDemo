@@ -1,16 +1,10 @@
-﻿using StatisticsCollector.Common;
-using DddSkeleton.Domain;
+﻿using DddSkeleton.Domain;
 using DddSkeleton.EventBus;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using StatisticsCollector.Measure;
 
 namespace StatisticsCollector.App
 {
-    public class SummaryAggregator: IService, ISubscribe<MeasurementProvided>
+    public class SummaryAggregator : IService, ISubscribe<MeasurementProvided>
     {
         public IAllSummaries AllSummaries;
         public ISummariesCreator SummariesCreator;

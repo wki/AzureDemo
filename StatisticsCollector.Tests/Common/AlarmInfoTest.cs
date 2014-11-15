@@ -1,6 +1,5 @@
-﻿using StatisticsCollector.Common;
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using StatisticsCollector.Common;
 
 namespace StatisticsCollector.Tests.Common
 {

@@ -6,10 +6,14 @@ namespace StatisticsCollector.Common
     public class AlarmInfo : ValueObject
     {
         public DateTime RaisedOn { get; private set; }
+
         public DateTime? ClearedOn { get; private set; }
+
         public string Message { get; private set; }
 
-        private AlarmInfo() {}
+        private AlarmInfo()
+        {
+        }
 
         public AlarmInfo(string message)
         {
@@ -28,9 +32,8 @@ namespace StatisticsCollector.Common
         }
 
         public bool IsCleared()
-        { 
+        {
             return ClearedOn != null;
         }
-
     }
 }

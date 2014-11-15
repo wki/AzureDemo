@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StatisticsCollector.App;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,11 +13,19 @@ namespace AzureDemo.Tests.Controllers
     [TestClass]
     public class HomeControllerTest
     {
+        IMeasureService MeasureService;
+
+        [TestInitialize]
+        public void Prepare()
+        {
+            MeasureService = null;
+        }
+
         //[TestMethod]
         //public void Index()
         //{
         //    // Arrange
-        //    HomeController controller = new HomeController();
+        //    HomeController controller = new HomeController(MeasureService);
 
         //    // Act
         //    ViewResult result = controller.Index() as ViewResult;
@@ -29,7 +38,7 @@ namespace AzureDemo.Tests.Controllers
         public void About()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            HomeController controller = new HomeController(MeasureService);
 
             // Act
             ViewResult result = controller.About() as ViewResult;
@@ -42,7 +51,7 @@ namespace AzureDemo.Tests.Controllers
         public void Contact()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            HomeController controller = new HomeController(MeasureService);
 
             // Act
             ViewResult result = controller.Contact() as ViewResult;

@@ -1,11 +1,4 @@
-﻿using Microsoft.WindowsAzure;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.File;
-using StatisticsCollector.App;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using StatisticsCollector.App;
 using System.Web.Mvc;
 
 namespace AzureDemo.Controllers
