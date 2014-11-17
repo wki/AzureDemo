@@ -48,8 +48,10 @@
     <Compile Include="Measure\IAllSummaries.cs" />
     <Compile Include="Measure\ISensorCreator.cs" />
     <Compile Include="Measure\ISummariesCreator.cs" />
+    <Compile Include="Measure\LatestMeasurements.cs" />
     <Compile Include="Measure\Measurement.cs" />
     <Compile Include="Measure\MeasurementProvided.cs" />
+    <Compile Include="Measure\RaisedAlarms.cs" />
     <Compile Include="Measure\Sensor.cs" />
     <Compile Include="Measure\SensorCreator.cs" />
     <Compile Include="Measure\Summaries.cs" />

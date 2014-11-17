@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using StatisticsCollector.Common;
 using StatisticsCollector.Measure;
+using StatisticsCollector.Repositories.LocalFile;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -106,6 +107,7 @@ namespace JsonImport
 
             var sensorCreator = Bootstrapper.container.Resolve<ISensorCreator>();
             var allSensors = Bootstrapper.container.Resolve<IAllSensors>();
+            var allSummaries = (AllSummaries) Bootstrapper.container.Resolve<IAllSummaries>();
             var sensor = sensorCreator.CreateSensor(sensorId);
 
             Measurements
@@ -123,6 +125,7 @@ namespace JsonImport
                 });
 
             allSensors.Save(sensor);
+            allSummaries.WriteToDisk();
 
             Console.WriteLine("    {0} of {1} -- Done", total, total);
         }

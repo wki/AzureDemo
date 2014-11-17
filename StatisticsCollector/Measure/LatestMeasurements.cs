@@ -1,10 +1,10 @@
 ﻿using StatisticsCollector.Common;
-using StatisticsCollector.Measure;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace StatisticsCollector.Repositories.AzureFile
+namespace StatisticsCollector.Measure
 {
+    // needed for serialization
     public class LatestMeasurements : Dictionary<SensorId, Measurement>, ISerializable
     {
     }

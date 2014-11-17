@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace StatisticsCollector.Repositories.AzureFile
+namespace StatisticsCollector.Measure
 {
+    // needed for serialization
     public class RaisedAlarms : Dictionary<SensorId, AlarmInfo>, ISerializable
     {
     }

@@ -73,9 +73,7 @@
     <Compile Include="AllSensors.cs" />
     <Compile Include="AllSummaries.cs" />
     <Compile Include="Cloud.cs" />
-    <Compile Include="LatestMeasurements.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RaisedAlarms.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DddSkeleton\DddSkeleton.csproj">
