@@ -28,7 +28,7 @@ namespace StatisticsCollector.Measure
             ProvideMeasurement(measurement);
         }
 
-        private void ProvideMeasurement(Measurement measurement)
+        public void ProvideMeasurement(Measurement measurement)
         {
             LatestMeasurement = measurement;
 

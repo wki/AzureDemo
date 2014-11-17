@@ -12,7 +12,7 @@ namespace JsonImport
 {
     public static class Bootstrapper
     {
-        static IWindsorContainer container = new WindsorContainer();
+        public static IWindsorContainer container = new WindsorContainer();
 
         public static void Initialize()
         {
@@ -27,7 +27,7 @@ namespace JsonImport
 
         private static void RegisterDomain()
         {
-            var dir = new AssemblyFilter(AppDomain.CurrentDomain.RelativeSearchPath);
+            var dir = new AssemblyFilter(AppDomain.CurrentDomain.BaseDirectory);
 
             container.Register(Classes
                 .FromAssemblyInDirectory(dir)
