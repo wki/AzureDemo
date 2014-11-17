@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Web
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureDemo", "AzureDemo\AzureDemo.csproj", "{294638C2-0FA0-4558-858D-F0CA3C4D7031}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticsCollector.Repositories.AzureFile", "StatisticsCollector.Repositories.AzureFile\StatisticsCollector.Repositories.AzureFile.csproj", "{2FFBB456-6C92-4F04-8525-B03D82943901}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticsCollector.Repositories.AzureFile.Tests", "StatisticsCollector.Repositories.AzureFile.Tests\StatisticsCollector.Repositories.AzureFile.Tests.csproj", "{8DE1BADA-B17A-4914-8832-9D543FDA90C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonImport", "JsonImport\JsonImport.csproj", "{BD37DE45-4DC1-441C-894B-11BEFE4B7223}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{8DE1BADA-B17A-4914-8832-9D543FDA90C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DE1BADA-B17A-4914-8832-9D543FDA90C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DE1BADA-B17A-4914-8832-9D543FDA90C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD37DE45-4DC1-441C-894B-11BEFE4B7223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD37DE45-4DC1-441C-894B-11BEFE4B7223}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD37DE45-4DC1-441C-894B-11BEFE4B7223}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD37DE45-4DC1-441C-894B-11BEFE4B7223}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

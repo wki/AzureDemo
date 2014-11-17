@@ -56,18 +56,7 @@ namespace AzureDemo
             container.Register(Classes
                 .FromAssemblyInDirectory(dir)
                 .BasedOn(typeof(IFactory), typeof(IRepository), typeof(IService))
-                // .BasedOn<IFactory>()
                 .WithService.AllInterfaces());
-
-            //container.Register(Classes
-            //    .FromAssemblyInDirectory(dir)
-            //    .BasedOn<IRepository>()
-            //    .WithServiceAllInterfaces());
-
-            //container.Register(Classes
-            //    .FromAssemblyInDirectory(dir)
-            //    .BasedOn<IService>()
-            //    .WithServiceAllInterfaces());
 
             container.Register(Classes
                 .FromAssemblyInDirectory(dir)
