@@ -21,6 +21,8 @@ namespace JsonImport
     {
         public int sensor_id { get; set; }
         public int latest_value { get; set; }
+        public int min_value { get; set; }
+        public int max_value { get; set; }
         public DateTime updated_at { get; set; }
     }
 
@@ -28,6 +30,9 @@ namespace JsonImport
     {
         static Dictionary<int, SensorId> Sensors;
         static List<MeasureImport> Measurements;
+
+        static readonly string MEASURE_FILE = @"E:\measure.json";
+        static readonly string SENSOR_FILE = @"E:\sensor.json";
 
         static void Main(string[] args)
         {
@@ -49,7 +54,7 @@ namespace JsonImport
             Console.WriteLine("Load Sensors...");
             var sensors =
                 JsonConvert.DeserializeObject<List<SensorImport>>(
-                    File.ReadAllText(@"E:\sensor.json")
+                    File.ReadAllText(SENSOR_FILE)
                 );
 
             Sensors = new Dictionary<int, SensorId>();
@@ -74,7 +79,7 @@ namespace JsonImport
             Console.WriteLine("Load Measures...");
             Measurements =
                 JsonConvert.DeserializeObject<List<MeasureImport>>(
-                    File.ReadAllText(@"E:\measure2.json")
+                    File.ReadAllText(MEASURE_FILE)
                 );
             Console.WriteLine("  ...{0} measurements loaded", Measurements.Count);
         }
@@ -84,16 +89,6 @@ namespace JsonImport
             Console.WriteLine("Save Measures...");
 
             Sensors.Keys.ToList().ForEach(s => SaveMeasures(s));
-
-            //Measurements.ForEach(m =>
-            //{
-            //    count++;
-            //    Console.WriteLine("  ...{0} of {1}", count, total);
-            //    var sensorId = Sensors[m.sensor_id];
-            //    var measurement = new Measurement(m.latest_value, m.updated_at);
-
-            //    var sensor = 
-            //});
         }
 
         private static void SaveMeasures(int id)
@@ -121,6 +116,8 @@ namespace JsonImport
                         Console.WriteLine("    {0} of {1}", count, total);
                         nextReport = DateTime.Now.AddSeconds(10);
                     }
+                    sensor.ProvideMeasurement(new Measurement(m.min_value, m.updated_at));
+                    sensor.ProvideMeasurement(new Measurement(m.max_value, m.updated_at));
                     sensor.ProvideMeasurement(new Measurement(m.latest_value, m.updated_at));
                 });
 

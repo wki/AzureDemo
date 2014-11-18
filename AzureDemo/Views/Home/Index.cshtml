@@ -19,6 +19,7 @@
                 </tr>
             </thead>
             <tbody>
+                @{ int i = 0; }
                 @foreach (var sensor in Model)
                 {
                     <tr>
@@ -26,10 +27,21 @@
                         <td>@sensor.LatestMeasurement.MeasuredOn</td>
                         <td>@sensor.LatestMeasurement.Result</td>
                         <td>-</td>
-                        <td>Xxx</td>
+                        <td>
+                            <!-- TODO: Icons einblenden -->
+                            <a href="#" class="_graph" style="position: relative;">
+                                H
+                                <div id="graph-@(i)-h" style="position: absolute; top: 0px; right: 0px; width: 640px; height: 400px; display: none; z-index: 1000; "><img data-src="/api/graph/@sensor.Id/hourly" /></div>
+                            </a>
+                            &nbsp;
+                            <a href="#">d</a>
+
+                        </td>
                     </tr>
+                    i++;
                 }
             </tbody>
         </table>
     </div>
 </div>
+

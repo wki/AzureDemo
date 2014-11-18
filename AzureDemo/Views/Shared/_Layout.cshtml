@@ -48,5 +48,21 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script>
+    $(document).ready(function () {
+        $('._graph')
+            .mouseenter(function () {
+                console.log('enter');
+                $(this).find('img').attr('src', $(this).find('img').data('src'));
+                $(this).find('div').show();
+            })
+            .mouseleave(function () {
+                console.log('leave');
+                $(this).find('div').hide();
+            });
+    })
+
+    </script>
 </body>
 </html>
