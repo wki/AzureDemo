@@ -1,6 +1,7 @@
 ﻿using StatisticsCollector.Common;
 using StatisticsCollector.Measure;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -36,31 +37,45 @@ namespace AzureDemo.Controllers.Api
         {
             var values = summaries.Collection.OrderBy(s => s.FromIncluding).ToList();
 
-            var chart = new Chart(width: 600, height: 400)
+            var measures = new List<int>();
+            values.ToList().ForEach(s => { measures.Add(3); measures.Add(s.Max); });
+
+            var x = new List<int>();
+            values.Select((v, i) => i).ToList().ForEach(i => { x.Add(i); x.Add(i); });
+            
+            var chart = new Chart(width: 600, height: 400, theme: ChartTheme.Blue)
                 .AddTitle(title)
-                .AddSeries(
-                    name: "Max",
-                    xField: "Time/Day",
-                    xValue: values.Select(s => description(s.FromIncluding)).ToArray(),
-                    yValues: values.Select(s => s.Max).ToArray(),
-                    chartType: "Area"
-                )
-                .AddSeries(
-                    name: "Avg",
-                    xField: "Time/Day",
-                    xValue: values.Select(s => description(s.FromIncluding)).ToArray(),
-                    yValues: values.Select(s => s.Avg).ToArray(),
-                    chartType: "Area"
-                )
+
+                // DOES NOT WORK COMPLETELY. TAKES VALUES BUT DOES NOT DISPLAY A RANGE
+                //.AddSeries(
+                //    name: "Max",
+                //    // legend: "Max",
+                //    chartType: "RangeColumn",
+                //    xField: "Time",
+                //    xValue: x,
+                //    yFields: "Low,,High", // double comma needed :-)
+                //    yValues: measures
+                //)
+
+                //// -- WORKS! but two splines
                 .AddSeries(
                     name: "Min",
                     xField: "Time/Day",
-                    xValue: values.Select(s => description(s.FromIncluding)).ToArray(),
+                    xValue: values.Select((s, i) => i).ToArray(), //values.Select(s => description(s.FromIncluding)).ToArray(),
                     yValues: values.Select(s => s.Min).ToArray(),
-                    chartType: "Area"
+                    chartType: "Spline"
+                )
+                .AddSeries(
+                    name: "Max",
+                    xField: "Time/Day",
+                    xValue: values.Select((s, i) => i).ToArray(), // values.Select(s => description(s.FromIncluding)).ToArray(),
+                    yValues: values.Select(s => s.Max).ToArray(),
+                    chartType: "Spline"
                 )
                 ;
+
             var image = chart.ToWebImage();
+            
 
             var responseMessage = new HttpResponseMessage();
             responseMessage.StatusCode = HttpStatusCode.OK;
