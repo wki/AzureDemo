@@ -22,3 +22,21 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.chart {
+    position: relative;
+}
+
+.chart-overlay {
+    position: absolute; 
+    top: 0px; 
+    right: 0px; 
+    width: 640px; 
+    height: 400px; 
+    display: none; 
+    z-index: 1000;
+}
+
+.chart:hover .chart-overlay {
+    display: block;
+}

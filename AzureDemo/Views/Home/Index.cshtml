@@ -24,17 +24,20 @@
                 {
                     <tr>
                         <td>@sensor.Id</td>
-                        <td>@sensor.LatestMeasurement.MeasuredOn</td>
-                        <td>@sensor.LatestMeasurement.Result</td>
+                        <td>@sensor.LatestMeasurement.MeasuredOn.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td align="right">@sensor.LatestMeasurement.Result</td>
                         <td>-</td>
                         <td>
                             <!-- TODO: Icons einblenden -->
-                            <a href="#" class="_graph" style="position: relative;">
-                                H
-                                <div id="graph-@(i)-h" style="position: absolute; top: 0px; right: 0px; width: 640px; height: 400px; display: none; z-index: 1000; "><img data-src="/api/graph/@sensor.Id/hourly" /></div>
-                            </a>
+                            <span class="chart _chart">
+                                <img src="~/Images/clock.png" alt="Hourly" />
+                                <img class="chart-overlay _overlay" data-src="/api/graph/@sensor.Id/hourly" />
+                            </span>
                             &nbsp;
-                            <a href="#">d</a>
+                            <span class="chart _chart">
+                                <img src="~/Images/calendar.png" alt="daily" />
+                                <img class="chart-overlay _overlay"  data-src="/api/graph/@sensor.Id/daily" />
+                            </span>
 
                         </td>
                     </tr>

@@ -33,6 +33,18 @@ namespace AzureDemo.Controllers.Api
             return BuildGraph("hourly - " + sensorId, summaries, d => d.Hour);
         }
 
+        [Route("{location}/{part}/{measure}/daily")]
+        [HttpGet]
+        public HttpResponseMessage Daily(string location, string part, string measure)
+        {
+            var sensorName = String.Join("/", location, part, measure);
+            var sensorId = new SensorId(sensorName);
+
+            var summaries = AllSummaries.DailyBySensorId(sensorId);
+
+            return BuildGraph("daily - " + sensorId, summaries, d => d.Day);
+        }
+
         private HttpResponseMessage BuildGraph(string title, Summaries summaries, Func<DateTime, int> description)
         {
             var values = summaries.Collection.OrderBy(s => s.FromIncluding).ToList();
