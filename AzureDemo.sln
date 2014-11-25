@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonImport", "JsonImport\Js
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticsCollector.Repositories.LocalFile", "StatisticsCollector.Repositories.LocalFile\StatisticsCollector.Repositories.LocalFile.csproj", "{479E79CF-8CCF-475A-8A69-F57C4563090D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HourlyAlarmCheck", "HourlyAlarmCheck\HourlyAlarmCheck.csproj", "{C3E774B2-ECBB-4D29-9E52-F42A4F36BC9B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{479E79CF-8CCF-475A-8A69-F57C4563090D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{479E79CF-8CCF-475A-8A69-F57C4563090D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{479E79CF-8CCF-475A-8A69-F57C4563090D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3E774B2-ECBB-4D29-9E52-F42A4F36BC9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3E774B2-ECBB-4D29-9E52-F42A4F36BC9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3E774B2-ECBB-4D29-9E52-F42A4F36BC9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3E774B2-ECBB-4D29-9E52-F42A4F36BC9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
