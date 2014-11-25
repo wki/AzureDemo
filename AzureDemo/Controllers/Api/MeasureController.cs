@@ -19,9 +19,7 @@ namespace AzureDemo.Controllers.Api
             MeasureService = measureService;
         }
 
-        // TODO: find a way to make this work:
-        // curl.exe -vXPOST http://localhost:49461/api/measure/erlangen/heizung/temperatur/provide -F value=12
-
+        // JSON Endpoint.
         [Route("{location}/{part}/{measure}/provide")]
         [HttpPost]
         public IHttpActionResult ProvideResult(
@@ -34,48 +32,28 @@ namespace AzureDemo.Controllers.Api
             return Ok();
         }
 
-        // curl.exe -vXPOST http://localhost:49461/api/measure/er/heiz/temp/result -F value=12
+        // accepts: application/x-www-form-urlencoded
+        // curl.exec -vXPOST http://localhost:49461/api/measure/er/heiz/temp/result -d value=12
         [Route("{location}/{part}/{measure}/result")]
         [HttpPost]
-        public async Task<IHttpActionResult> SaveResult(string location, string part, string measure)
+        public async Task<IHttpActionResult> SaveResult(string location, string part, string measure, PostValue postValue)
         {
-            if (!Request.Content.IsMimeMultipartContent())
-            {
-                return BadRequest("not a multipart content");
-            }
+            var sensorName = String.Join("/", location, part, measure);
+            Trace.TraceInformation("Sensor {0} provides result {1}", sensorName, postValue.Value);
+            MeasureService.ProvideResult(sensorName, postValue.Value);
 
-            string result = "";
-
-            // works, but is very inflexible as we would have to handle headers by ourselves...
-            //var provider = await Request.Content.ReadAsMultipartAsync(new MultipartMemoryStreamProvider(), 8192);
-            //foreach (HttpContent content in provider.Contents)
-            //{
-            //    // var data = await content.ReadAsMultipartAsync();
-            //    var data = await content.ReadAsStringAsync();
-            //    result = result + " " + content.Headers.ToString() + ":" + data;
-            //}
-
-            // good but might write to a file somewhere.
-            string root = HttpContext.Current.Server.MapPath("~/App_Data");
-            var provider = new MultipartFormDataStreamProvider(root);
-            try
-            {
-                await Request.Content.ReadAsMultipartAsync(provider);
-                result = provider.FormData.Get("result");
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.ToString());
-            }
-
-            return Ok(location + "/" + part + "/" + measure + ":" + result);
+            return Ok(location + "/" + part + "/" + measure + ":" + postValue.Value);
         }
-
     }
 
-    // just a simple helper to get things from a json input.
+    // just simple helpers to get things from a json / x-www-form-urlencoded input.
     public class PostResult
     {
         public int Result { get; set; }
+    }
+
+    public class PostValue
+    {
+        public int Value { get; set; }
     }
 }
