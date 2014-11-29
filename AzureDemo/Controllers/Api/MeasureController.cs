@@ -3,9 +3,12 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Configuration;
 
 namespace AzureDemo.Controllers.Api
 {
@@ -44,16 +47,36 @@ namespace AzureDemo.Controllers.Api
 
             return Ok(location + "/" + part + "/" + measure + ":" + postValue.Value);
         }
-    }
 
-    // just simple helpers to get things from a json / x-www-form-urlencoded input.
-    public class PostResult
-    {
-        public int Result { get; set; }
-    }
+        [Route("sendmail")]
+        [HttpGet]
+        public async Task<IHttpActionResult> SendMail()
+        {
+            var message = new MailMessage(
+                from: "wolfgang@kinkeldei.de",
+                to: "wolfgang@kinkeldei.de",
+                subject: "Testmail from Azure",
+                body: "huuuh -- mail seems to work."
+            );
 
-    public class PostValue
-    {
-        public int Value { get; set; }
+            var appSettings = ConfigurationManager.AppSettings;
+            var smtpHost = appSettings.Get("SmtpHost");
+            var smtpUser = appSettings.Get("SmtpUser");
+            var smtpPassword = appSettings.Get("SmtpPassword");
+
+            var sender = new SmtpClient(smtpHost);
+            sender.Credentials = new NetworkCredential(smtpUser, smtpPassword);
+
+            try
+            {
+                sender.Send(message);
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.ToString());
+            } 
+
+            return Ok();
+        }
     }
 }

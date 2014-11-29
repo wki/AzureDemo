@@ -188,6 +188,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\GraphController.cs" />
     <Compile Include="Controllers\Api\MeasureController.cs" />
+    <Compile Include="Controllers\Api\PostResult.cs" />
+    <Compile Include="Controllers\Api\PostValue.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
