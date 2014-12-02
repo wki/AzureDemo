@@ -7,6 +7,7 @@ namespace StatisticsCollector.Measure
     {
         public int Result { get; set; }
 
+        // typically Utc
         public DateTime MeasuredOn { get; set; }
 
         public Measurement()
@@ -15,7 +16,7 @@ namespace StatisticsCollector.Measure
         }
 
         public Measurement(int result)
-            : this(result, DateTime.Now)
+            : this(result, DateTime.UtcNow)
         {
         }
 
@@ -23,6 +24,17 @@ namespace StatisticsCollector.Measure
         {
             Result = result;
             MeasuredOn = measuredOn;
+        }
+
+        // german time
+        public DateTime LocalMeasuredOn()
+        {
+            var measuredOnUtc = MeasuredOn.ToUniversalTime();
+
+            return TimeZoneInfo.ConvertTimeFromUtc(
+                measuredOnUtc,
+                TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time")
+            );
         }
     }
 }
