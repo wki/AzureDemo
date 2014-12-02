@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="AllSensors.cs" />
     <Compile Include="AllSummaries.cs" />
+    <Compile Include="AzureRepository.cs" />
     <Compile Include="Cloud.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

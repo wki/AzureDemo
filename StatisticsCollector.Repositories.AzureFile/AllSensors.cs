@@ -9,7 +9,7 @@ namespace StatisticsCollector.Repositories.AzureFile
 {
     // see README.txt for file and formats description
 
-    public class AllSensors : IAllSensors, IRepository
+    public class AllSensors : AzureRepository, IAllSensors, IRepository
     {
         private static readonly string LATEST_MEASUREMENTS_FILE = "latest_measurements.json";
         private static readonly string RAISED_ALARMS_FILE = "raised_alarms.json";
@@ -65,7 +65,8 @@ namespace StatisticsCollector.Repositories.AzureFile
             if (file.Exists())
             {
                 latestMeasurements = JsonConvert.DeserializeObject<LatestMeasurements>(
-                    file.DownloadText()
+                    file.DownloadText(),
+                    jsonSerializerSettings
                 );
             }
             else
