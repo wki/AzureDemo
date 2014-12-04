@@ -47,52 +47,17 @@ namespace AzureDemo.Controllers.Api
 
         private HttpResponseMessage BuildGraph(string title, Summaries summaries, Func<DateTime, int> description)
         {
-            // ordered measures
+            // ordered measures only when within a valid range to avoid "spikes"
             var values = summaries.Collection
-                .OrderBy(s => s.FromIncluding)
                 .Where(s => s.Min > -50 && s.Max < 70)
+                .OrderBy(s => s.FromIncluding)
                 .ToList();
 
-            // pairwise for range charts
-            //var measures = new List<int>();
-            //values.ForEach(v => { measures.Add(v.Max); measures.Add(v.Min); });
-
-            //var x = new List<DateTime>();
-            //values.ForEach(v => { x.Add(v.FromIncluding); x.Add(v.FromIncluding); });
-
-            // single values for regular graphs
-            var dates = values.Select(s => s.FromIncluding).ToArray();
-            var minValues = values.Select(s => s.Min).ToArray();
-            var maxValues = values.Select(s => s.Max).ToArray();
-
-            var chart = new Chart(width: 600, height: 400, theme: ChartTheme.Blue)
-                .AddTitle(title)
-
-                // DOES NOT WORK COMPLETELY. TAKES VALUES BUT DOES NOT DISPLAY A RANGE
-                //.AddSeries(
-                //    name: "Range",
-                //    chartType: "SplineRange",
-                //    xField: "Time",
-                //    xValue: x,
-                //    yFields: "High,,Low", // double comma needed :-)
-                //    yValues: measures
-                //)
-
-                // -- WORKS! but two splines
-                .AddSeries(
-                    name: "Max",
-                    xField: "Time/Day",
-                    xValue: dates,
-                    yValues: maxValues,
-                    chartType: "Spline"
-                )
-                .AddSeries(
-                    name: "Min",
-                    xField: "Time/Day",
-                    xValue: dates,
-                    yValues: minValues,
-                    chartType: "Spline"
-                );
+            var chart = new Chart(width: 600, height: 400, theme: ChartTheme.Blue);
+            chart.AddTitle(title);
+            // AddRangeChartSeries(values, chart);
+            AddMaxLineSeries(values, chart);
+            AddMinLineSeries(values, chart);
 
             var image = chart.ToWebImage();
 
@@ -102,6 +67,53 @@ namespace AzureDemo.Controllers.Api
             responseMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
 
             return responseMessage;
+        }
+
+        // does not work completely. Takes values but does not display a range
+        private void AddRangeChartSeries(List<Summary> values, Chart chart)
+        {
+            var measures = new List<int>();
+            values.ForEach(v => { measures.Add(v.Max); measures.Add(v.Min); });
+
+            var x = new List<DateTime>();
+            values.ForEach(v => { x.Add(v.FromIncluding); x.Add(v.FromIncluding); });
+
+            chart.AddSeries(
+                name: "Range",
+                chartType: "SplineRange",
+                xField: "Time",
+                xValue: x,
+                yFields: "High,,Low", // double comma needed :-)
+                yValues: measures
+            );
+        }
+
+        private void AddMaxLineSeries(List<Summary> values, Chart chart)
+        {
+            var dates = values.Select(s => s.FromIncluding).ToArray();
+            var maxValues = values.Select(s => s.Max).ToArray();
+
+            chart.AddSeries(
+                name: "Max",
+                xField: "Time/Day",
+                xValue: dates,
+                yValues: maxValues,
+                chartType: "Spline"
+            );
+        }
+
+        private void AddMinLineSeries(List<Summary> values, Chart chart)
+        {
+            var dates = values.Select(s => s.FromIncluding).ToArray();
+            var minValues = values.Select(s => s.Min).ToArray();
+
+            chart.AddSeries(
+                name: "Min",
+                xField: "Time/Day",
+                xValue: dates,
+                yValues: minValues,
+                chartType: "Spline"
+            );
         }
     }
 }
