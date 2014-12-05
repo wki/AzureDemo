@@ -270,6 +270,10 @@
       <Project>{457dd21b-649f-43de-b6a3-164f5314edef}</Project>
       <Name>DddSkeleton</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StatisticsCollector.Init\StatisticsCollector.Init.csproj">
+      <Project>{ebc0e734-79be-4508-8e13-e33e54f8c774}</Project>
+      <Name>StatisticsCollector.Init</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StatisticsCollector.Repositories.AzureFile\StatisticsCollector.Repositories.AzureFile.csproj">
       <Project>{2ffbb456-6c92-4f04-8525-b03d82943901}</Project>
       <Name>StatisticsCollector.Repositories.AzureFile</Name>

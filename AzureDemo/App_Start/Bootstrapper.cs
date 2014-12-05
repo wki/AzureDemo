@@ -1,9 +1,6 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Mvc;
-using DddSkeleton.Domain;
-using DddSkeleton.EventBus;
-using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Web.Http;
@@ -18,8 +15,8 @@ namespace AzureDemo
         {
             var container = new WindsorContainer();
 
-            RegisterInfrastructure(container);
-            RegisterDomain(container);
+            StatisticsCollector.Domain.Initialize(container);
+
             RegisterControllers(container);
             RegisterWebApi(container);
 
@@ -43,35 +40,11 @@ namespace AzureDemo
             }
         }
 
-        private static void RegisterInfrastructure(WindsorContainer container)
-        {
-            // return value is not of interest. Hub remains instantiated.
-            new Hub(container);
-        }
-
-        private static void RegisterDomain(WindsorContainer container)
-        {
-            var dir = new AssemblyFilter(AppDomain.CurrentDomain.RelativeSearchPath);
-
-            container.Register(Classes
-                .FromAssemblyInDirectory(dir)
-                .BasedOn(typeof(IFactory), typeof(IRepository), typeof(IService))
-                .WithService.AllInterfaces());
-
-            container.Register(Classes
-                .FromAssemblyInDirectory(dir)
-                .BasedOn<ISubscribe<IEvent>>()
-                .WithService.AllInterfaces()
-                .Configure(c => c.Named("EventHandler:" + c.Implementation.FullName)));
-        }
-
-        private static void RegisterControllers(WindsorContainer container)
+        private static void RegisterControllers(IWindsorContainer container)
         {
             var factory = new WindsorControllerFactory(container.Kernel);
             ControllerBuilder.Current.SetControllerFactory(factory);
 
-            // hier nur die innerhalb der Mvc App registrierten Typen registrieren.
-            // Der Domain kümmert sich um sich selbst
             container.Register(Classes
                 .FromThisAssembly()
                 .BasedOn<IController>()
@@ -79,7 +52,7 @@ namespace AzureDemo
             );
         }
 
-        private static void RegisterWebApi(WindsorContainer container)
+        private static void RegisterWebApi(IWindsorContainer container)
         {
             GlobalConfiguration.Configuration.DependencyResolver = new WindsorResolver(container);
 
