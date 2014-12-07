@@ -39,6 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alarm\Alarm.cs" />
+    <Compile Include="Alarm\AlarmCreator.cs" />
+    <Compile Include="Alarm\IAlarmCreator.cs" />
+    <Compile Include="Alarm\IAllAlarms.cs" />
+    <Compile Include="App\AlarmService.cs" />
+    <Compile Include="App\IAlarmService.cs" />
     <Compile Include="App\IMeasureService.cs" />
     <Compile Include="App\MeasureService.cs" />
     <Compile Include="Common\AlarmInfo.cs" />
@@ -51,7 +57,7 @@
     <Compile Include="Measure\LatestMeasurements.cs" />
     <Compile Include="Measure\Measurement.cs" />
     <Compile Include="Measure\MeasurementProvided.cs" />
-    <Compile Include="Measure\RaisedAlarms.cs" />
+    <Compile Include="Common\RaisedAlarms.cs" />
     <Compile Include="Measure\Sensor.cs" />
     <Compile Include="Measure\SensorCreator.cs" />
     <Compile Include="Measure\Summaries.cs" />
@@ -61,9 +67,7 @@
     <Compile Include="Measure\SummaryKind.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Alarm\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DddSkeleton\DddSkeleton.csproj">
       <Project>{457dd21b-649f-43de-b6a3-164f5314edef}</Project>

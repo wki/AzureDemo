@@ -31,7 +31,8 @@ namespace StatisticsCollector
 
         private static void RegisterDomain(IWindsorContainer container)
         {
-            var dir = new AssemblyFilter(AppDomain.CurrentDomain.RelativeSearchPath);
+            // before we had: .RelativeSearchPath -- failed sometimes
+            var dir = new AssemblyFilter(AppDomain.CurrentDomain.BaseDirectory);
 
             container.Register(Classes
                 .FromAssemblyInDirectory(dir)

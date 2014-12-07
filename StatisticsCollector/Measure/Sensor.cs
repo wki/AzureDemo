@@ -40,5 +40,10 @@ namespace StatisticsCollector.Measure
                 }
             );
         }
+
+        public bool HasRaisedAlarm()
+        {
+            return AlarmInfo != null && !AlarmInfo.IsCleared();
+        }
     }
 }
