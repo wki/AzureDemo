@@ -17,7 +17,7 @@ namespace StatisticsCollector.Common
 
         public AlarmInfo(string message)
         {
-            RaisedOn = DateTime.Now;
+            RaisedOn = DateTime.UtcNow;
             Message = message;
         }
 
@@ -26,7 +26,7 @@ namespace StatisticsCollector.Common
             return new AlarmInfo
             {
                 RaisedOn = this.RaisedOn,
-                ClearedOn = DateTime.Now,
+                ClearedOn = DateTime.UtcNow,
                 Message = this.Message
             };
         }

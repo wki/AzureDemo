@@ -12,17 +12,17 @@ using System.Configuration;
 
 namespace AzureDemo.Controllers.Api
 {
-    [RoutePrefix("api/measure")]
+    [RoutePrefix("sensor")]
     public class MeasureController : ApiController
     {
-        public IMeasureService MeasureService { get; set; }
+        private IMeasureService measureService { get; set; }
 
         public MeasureController(IMeasureService measureService)
         {
-            MeasureService = measureService;
+            this.measureService = measureService;
         }
 
-        // JSON Endpoint.
+        // experimental JSON Endpoint.
         [Route("{location}/{part}/{measure}/provide")]
         [HttpPost]
         public IHttpActionResult ProvideResult(
@@ -30,20 +30,21 @@ namespace AzureDemo.Controllers.Api
         {
             var sensorName = String.Join("/", location, part, measure);
             Trace.TraceInformation("Sensor {0} provides result {1}", sensorName, postResult.Result);
-            MeasureService.ProvideResult(sensorName, postResult.Result);
+            measureService.ProvideResult(sensorName, postResult.Result);
 
             return Ok();
         }
 
+        // same URL as old system, just another host name
         // accepts: application/x-www-form-urlencoded
-        // curl.exec -vXPOST http://localhost:49461/api/measure/er/heiz/temp/result -d value=12
-        [Route("{location}/{part}/{measure}/result")]
+        // curl.exec -vXPOST http://localhost:49461/sensor/er/heiz/temp -d value=12
+        [Route("{location}/{part}/{measure}")]
         [HttpPost]
         public async Task<IHttpActionResult> SaveResult(string location, string part, string measure, PostValue postValue)
         {
             var sensorName = String.Join("/", location, part, measure);
             Trace.TraceInformation("Sensor {0} provides result {1}", sensorName, postValue.Value);
-            MeasureService.ProvideResult(sensorName, postValue.Value);
+            measureService.ProvideResult(sensorName, postValue.Value);
 
             return Ok(location + "/" + part + "/" + measure + ":" + postValue.Value);
         }

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace StatisticsCollector.Repositories.AzureFile
 {
-    public class AllSummaries : IAllSummaries, IRepository
+    public class AllSummaries : AzureRepository, IAllSummaries, IRepository
     {
         public Summaries HourlyBySensorId(SensorId sensorId)
         {
@@ -50,7 +50,8 @@ namespace StatisticsCollector.Repositories.AzureFile
             return new Summaries(sensorId, summaryKind)
             {
                 Collection = JsonConvert.DeserializeObject<List<Summary>>(
-                    file.DownloadText()
+                    file.DownloadText(),
+                    jsonSerializerSettings
                 )
             };
         }

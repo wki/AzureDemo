@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticsCollector.Reposit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HourlyAlarmCheck", "HourlyAlarmCheck\HourlyAlarmCheck.csproj", "{C3E774B2-ECBB-4D29-9E52-F42A4F36BC9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticsCollector.Init", "StatisticsCollector.Init\StatisticsCollector.Init.csproj", "{EBC0E734-79BE-4508-8E13-E33E54F8C774}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{C3E774B2-ECBB-4D29-9E52-F42A4F36BC9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3E774B2-ECBB-4D29-9E52-F42A4F36BC9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3E774B2-ECBB-4D29-9E52-F42A4F36BC9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBC0E734-79BE-4508-8E13-E33E54F8C774}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBC0E734-79BE-4508-8E13-E33E54F8C774}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBC0E734-79BE-4508-8E13-E33E54F8C774}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBC0E734-79BE-4508-8E13-E33E54F8C774}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

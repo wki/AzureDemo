@@ -13,7 +13,7 @@ namespace DddSkeleton.Domain
 
         public DomainEvent()
         {
-            OccuredOn = DateTime.Now;
+            OccuredOn = DateTime.UtcNow;
         }
     }
 }

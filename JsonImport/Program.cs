@@ -98,7 +98,7 @@ namespace JsonImport
 
             var count = 0;
             var total = Measurements.Count(m => m.sensor_id == id);
-            var nextReport = DateTime.Now.AddSeconds(10);
+            var nextReport = DateTime.UtcNow.AddSeconds(10);
 
             var sensorCreator = Bootstrapper.container.Resolve<ISensorCreator>();
             var allSensors = Bootstrapper.container.Resolve<IAllSensors>();
@@ -111,10 +111,10 @@ namespace JsonImport
                 .ForEach(m =>
                 {
                     count++;
-                    if (DateTime.Now > nextReport)
+                    if (DateTime.UtcNow > nextReport)
                     {
                         Console.WriteLine("    {0} of {1}", count, total);
-                        nextReport = DateTime.Now.AddSeconds(10);
+                        nextReport = DateTime.UtcNow.AddSeconds(10);
                     }
                     sensor.ProvideMeasurement(new Measurement(m.min_value, m.updated_at));
                     sensor.ProvideMeasurement(new Measurement(m.max_value, m.updated_at));

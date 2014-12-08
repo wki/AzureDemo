@@ -24,7 +24,7 @@
                 {
                     <tr>
                         <td>@sensor.Id.DelimitedBy(" / ")</td>
-                        <td>@sensor.LatestMeasurement.MeasuredOn.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@sensor.LatestMeasurement.LocalMeasuredOn().ToString("yyyy-MM-dd HH:mm")</td>
                         <td align="right">@sensor.LatestMeasurement.Result</td>
                         <td>-</td>
                         <td>

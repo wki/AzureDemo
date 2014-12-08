@@ -47,47 +47,19 @@ namespace AzureDemo.Controllers.Api
 
         private HttpResponseMessage BuildGraph(string title, Summaries summaries, Func<DateTime, int> description)
         {
-            var values = summaries.Collection.OrderBy(s => s.FromIncluding).ToList();
+            // ordered measures only when within a valid range to avoid "spikes"
+            var values = summaries.Collection
+                .Where(s => s.Min > -50 && s.Max < 70)
+                .OrderBy(s => s.FromIncluding)
+                .ToList();
 
-            var measures = new List<int>();
-            values.ToList().ForEach(s => { measures.Add(3); measures.Add(s.Max); });
-
-            var x = new List<int>();
-            values.Select((v, i) => i).ToList().ForEach(i => { x.Add(i); x.Add(i); });
-            
-            var chart = new Chart(width: 600, height: 400, theme: ChartTheme.Blue)
-                .AddTitle(title)
-
-                // DOES NOT WORK COMPLETELY. TAKES VALUES BUT DOES NOT DISPLAY A RANGE
-                //.AddSeries(
-                //    name: "Max",
-                //    // legend: "Max",
-                //    chartType: "RangeColumn",
-                //    xField: "Time",
-                //    xValue: x,
-                //    yFields: "Low,,High", // double comma needed :-)
-                //    yValues: measures
-                //)
-
-                //// -- WORKS! but two splines
-                .AddSeries(
-                    name: "Min",
-                    xField: "Time/Day",
-                    xValue: values.Select((s, i) => i).ToArray(), //values.Select(s => description(s.FromIncluding)).ToArray(),
-                    yValues: values.Select(s => s.Min).ToArray(),
-                    chartType: "Spline"
-                )
-                .AddSeries(
-                    name: "Max",
-                    xField: "Time/Day",
-                    xValue: values.Select((s, i) => i).ToArray(), // values.Select(s => description(s.FromIncluding)).ToArray(),
-                    yValues: values.Select(s => s.Max).ToArray(),
-                    chartType: "Spline"
-                )
-                ;
+            var chart = new Chart(width: 600, height: 400, theme: ChartTheme.Blue);
+            chart.AddTitle(title);
+            // AddRangeChartSeries(values, chart);
+            AddMaxLineSeries(values, chart);
+            AddMinLineSeries(values, chart);
 
             var image = chart.ToWebImage();
-            
 
             var responseMessage = new HttpResponseMessage();
             responseMessage.StatusCode = HttpStatusCode.OK;
@@ -97,24 +69,51 @@ namespace AzureDemo.Controllers.Api
             return responseMessage;
         }
 
-        [Route("{id}/chart")]
-        [HttpGet]
-        public HttpResponseMessage Chart(int id)
+        // does not work completely. Takes values but does not display a range
+        private void AddRangeChartSeries(List<Summary> values, Chart chart)
         {
-            var chart = new Chart(width: 600, height: 400)
-                .AddTitle("Chart Title")
-                .AddSeries(
-                    name: "Employee",
-                    xValue: new[] { "Peter", "Andrew", "Julie", "Mary", "Dave" },
-                    yValues: new[] { 2, 6, 4, 5, 3 });
-            var image = chart.ToWebImage();
+            var measures = new List<int>();
+            values.ForEach(v => { measures.Add(v.Max); measures.Add(v.Min); });
 
-            var responseMessage = new HttpResponseMessage();
-            responseMessage.StatusCode = HttpStatusCode.OK;
-            responseMessage.Content = new ByteArrayContent(image.GetBytes());
-            responseMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+            var x = new List<DateTime>();
+            values.ForEach(v => { x.Add(v.FromIncluding); x.Add(v.FromIncluding); });
 
-            return responseMessage;
+            chart.AddSeries(
+                name: "Range",
+                chartType: "SplineRange",
+                xField: "Time",
+                xValue: x,
+                yFields: "High,,Low", // double comma needed :-)
+                yValues: measures
+            );
+        }
+
+        private void AddMaxLineSeries(List<Summary> values, Chart chart)
+        {
+            var dates = values.Select(s => s.FromIncluding).ToArray();
+            var maxValues = values.Select(s => s.Max).ToArray();
+
+            chart.AddSeries(
+                name: "Max",
+                xField: "Time/Day",
+                xValue: dates,
+                yValues: maxValues,
+                chartType: "Spline"
+            );
+        }
+
+        private void AddMinLineSeries(List<Summary> values, Chart chart)
+        {
+            var dates = values.Select(s => s.FromIncluding).ToArray();
+            var minValues = values.Select(s => s.Min).ToArray();
+
+            chart.AddSeries(
+                name: "Min",
+                xField: "Time/Day",
+                xValue: dates,
+                yValues: minValues,
+                chartType: "Spline"
+            );
         }
     }
 }

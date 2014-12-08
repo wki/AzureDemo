@@ -7,13 +7,10 @@ namespace StatisticsCollector.App
 {
     public class MeasureService : IMeasureService, IService
     {
-        public IAllSensors AllSensors { get; set; }
-
-        public ISensorCreator SensorCreator { get; set; }
-
-        public IAllSummaries AllSummaries { get; set; }
-
-        public ISummariesCreator SummariesCreator { get; set; }
+        private IAllSensors AllSensors { get; set; }
+        private ISensorCreator SensorCreator { get; set; }
+        private IAllSummaries AllSummaries { get; set; }
+        private ISummariesCreator SummariesCreator { get; set; }
 
         public MeasureService(IAllSensors allSensors, ISensorCreator sensorCreator,
             IAllSummaries allSummaries, ISummariesCreator summariesCreator)

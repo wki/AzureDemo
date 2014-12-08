@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2FFBB456-6C92-4F04-8525-B03D82943901}</ProjectGuid>
+    <ProjectGuid>{EBC0E734-79BE-4508-8E13-E33E54F8C774}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StatisticsCollector.Repositories.AzureFile</RootNamespace>
-    <AssemblyName>StatisticsCollector.Repositories.AzureFile</AssemblyName>
+    <RootNamespace>StatisticsCollector.Init</RootNamespace>
+    <AssemblyName>StatisticsCollector.Init</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,37 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging">
-      <HintPath>..\packages\Common.Logging.2.2.0\lib\net40\Common.Logging.dll</HintPath>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging.Core">
-      <HintPath>..\packages\Common.Logging.Core.2.2.0\lib\net40\Common.Logging.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Data.Edm">
-      <HintPath>..\packages\Microsoft.Data.Edm.5.6.2\lib\net40\Microsoft.Data.Edm.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Data.OData">
-      <HintPath>..\packages\Microsoft.Data.OData.5.6.2\lib\net40\Microsoft.Data.OData.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Data.Services.Client">
-      <HintPath>..\packages\Microsoft.Data.Services.Client.5.6.2\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.2.0.3\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.WindowsAzure.Storage, Version=4.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WindowsAzure.Storage.4.3.0\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Spatial">
-      <HintPath>..\packages\System.Spatial.5.6.2\lib\net40\System.Spatial.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -70,29 +48,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AllAlarms.cs" />
-    <Compile Include="AllSensors.cs" />
-    <Compile Include="AllSummaries.cs" />
-    <Compile Include="AzureRepository.cs" />
-    <Compile Include="Cloud.cs" />
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DddSkeleton\DddSkeleton.csproj">
-      <Project>{457dd21b-649f-43de-b6a3-164f5314edef}</Project>
-      <Name>DddSkeleton</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StatisticsCollector\StatisticsCollector.csproj">
-      <Project>{d12631d2-2e5b-4fae-959b-e9433fb1d21a}</Project>
-      <Name>StatisticsCollector</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="README.txt" />
+    <ProjectReference Include="..\DddSkeleton\DddSkeleton.csproj">
+      <Project>{457dd21b-649f-43de-b6a3-164f5314edef}</Project>
+      <Name>DddSkeleton</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StatisticsCollector.Repositories.AzureFile\StatisticsCollector.Repositories.AzureFile.csproj">
+      <Project>{2ffbb456-6c92-4f04-8525-b03d82943901}</Project>
+      <Name>StatisticsCollector.Repositories.AzureFile</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StatisticsCollector\StatisticsCollector.csproj">
+      <Project>{d12631d2-2e5b-4fae-959b-e9433fb1d21a}</Project>
+      <Name>StatisticsCollector</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace StatisticsCollector.Measure
+namespace StatisticsCollector.Common
 {
-    // needed for serialization
+    // needed for serialization ba various projects
+    // keeping it here avoids repetition
     public class RaisedAlarms : Dictionary<SensorId, AlarmInfo>, ISerializable
     {
     }
