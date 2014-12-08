@@ -1,6 +1,6 @@
 ﻿using StatisticsCollector.Common;
 
-namespace StatisticsCollector.Alarm
+namespace StatisticsCollector.Alarms
 {
     public interface IAlarmCreator
     {

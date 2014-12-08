@@ -70,6 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllAlarms.cs" />
     <Compile Include="AllSensors.cs" />
     <Compile Include="AllSummaries.cs" />
     <Compile Include="AzureRepository.cs" />

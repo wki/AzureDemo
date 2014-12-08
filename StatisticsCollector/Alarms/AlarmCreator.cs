@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StatisticsCollector.Alarm
+namespace StatisticsCollector.Alarms
 {
     public class AlarmCreator : IAlarmCreator
     {

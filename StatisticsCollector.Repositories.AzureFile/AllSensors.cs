@@ -11,9 +11,6 @@ namespace StatisticsCollector.Repositories.AzureFile
 
     public class AllSensors : AzureRepository, IAllSensors, IRepository
     {
-        private static readonly string LATEST_MEASUREMENTS_FILE = "latest_measurements.json";
-        private static readonly string RAISED_ALARMS_FILE = "raised_alarms.json";
-
         public Sensor ById(SensorId sensorId)
         {
             var measurements = LoadLatestMeasurements();
@@ -53,61 +50,5 @@ namespace StatisticsCollector.Repositories.AzureFile
                     : null
             );
         }
-
-        #region Latest Measurements
-
-        // made public to avoid repetitions in test code
-        public LatestMeasurements LoadLatestMeasurements()
-        {
-            LatestMeasurements latestMeasurements;
-
-            var file = Cloud.File(LATEST_MEASUREMENTS_FILE);
-            if (file.Exists())
-            {
-                latestMeasurements = JsonConvert.DeserializeObject<LatestMeasurements>(
-                    file.DownloadText(),
-                    jsonSerializerSettings
-                );
-            }
-            else
-            {
-                latestMeasurements = new LatestMeasurements();
-            }
-
-            return latestMeasurements;
-        }
-
-        // made public to avoid repetitions in test code
-        public void SaveLatestMeasurements(LatestMeasurements latestMeasurements)
-        {
-            Cloud.File(LATEST_MEASUREMENTS_FILE)
-                .UploadText(JsonConvert.SerializeObject(latestMeasurements));
-        }
-
-        #endregion Latest Measurements
-
-        #region Alarm Info
-
-        // made public to avoid repetitions in test code
-        public RaisedAlarms LoadRaisedAlarms()
-        {
-            RaisedAlarms raisedAlarms;
-
-            var file = Cloud.File(RAISED_ALARMS_FILE);
-            if (file.Exists())
-            {
-                raisedAlarms = JsonConvert.DeserializeObject<RaisedAlarms>(
-                    file.DownloadText()
-                );
-            }
-            else
-            {
-                raisedAlarms = new RaisedAlarms();
-            }
-
-            return raisedAlarms;
-        }
-
-        #endregion Alarm Info
     }
 }

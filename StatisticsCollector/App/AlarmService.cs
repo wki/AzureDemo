@@ -1,5 +1,5 @@
 ﻿using DddSkeleton.Domain;
-using StatisticsCollector.Alarm;
+using StatisticsCollector.Alarms;
 using StatisticsCollector.Measure;
 using System;
 using System.Collections.Generic;

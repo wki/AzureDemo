@@ -39,10 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alarm\Alarm.cs" />
-    <Compile Include="Alarm\AlarmCreator.cs" />
-    <Compile Include="Alarm\IAlarmCreator.cs" />
-    <Compile Include="Alarm\IAllAlarms.cs" />
+    <Compile Include="Alarms\Alarm.cs" />
+    <Compile Include="Alarms\AlarmCreator.cs" />
+    <Compile Include="Alarms\IAlarmCreator.cs" />
+    <Compile Include="Alarms\IAllAlarms.cs" />
     <Compile Include="App\AlarmService.cs" />
     <Compile Include="App\IAlarmService.cs" />
     <Compile Include="App\IMeasureService.cs" />

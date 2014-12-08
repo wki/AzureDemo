@@ -1,13 +1,13 @@
 ﻿using StatisticsCollector.Common;
 using System.Collections.Generic;
 
-namespace StatisticsCollector.Alarm
+namespace StatisticsCollector.Alarms
 {
     public interface IAllAlarms
     {
         IEnumerable<Alarm> ListRaisedAlarms();
         Alarm RaisedAlarmBySensorId(SensorId sensorId);
-        IEnumerable<Alarm> BySensorId(SensorId sensorId);
+        IList<AlarmInfo> BySensorId(SensorId sensorId);
         void Save(Alarm alarm);
     }
 }

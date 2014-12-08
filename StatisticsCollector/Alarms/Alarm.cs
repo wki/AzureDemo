@@ -1,12 +1,14 @@
 ﻿using DddSkeleton.Domain;
 using StatisticsCollector.Common;
 
-namespace StatisticsCollector.Alarm
+namespace StatisticsCollector.Alarms
 {
     public class Alarm : AggregateRoot<int>
     {
         public SensorId SensorId { get; set; }
         public AlarmInfo AlarmInfo { get; set; }
+
+        public Alarm() {}
 
         public Alarm(SensorId sensorId)
         {
