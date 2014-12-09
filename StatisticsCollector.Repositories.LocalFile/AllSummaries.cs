@@ -53,7 +53,7 @@ namespace StatisticsCollector.Repositories.LocalFile
         private string BuildFile(SensorId sensorId, SummaryKind summaryKind)
         {
             var filename = String
-                .Join("-", sensorId.DelimitedBy("-"), summaryKind)
+                .Join("-", sensorId.ToString("-"), summaryKind)
                 .ToLower() + ".json";
 
             return File(filename);

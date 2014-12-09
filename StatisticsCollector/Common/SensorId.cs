@@ -26,12 +26,7 @@ namespace StatisticsCollector.Common
         // this one will be serialized by NewtonSoft.JSON
         public string Name
         {
-            get { return DelimitedBy("/"); }
-        }
-
-        public string DelimitedBy(string delimiter)
-        {
-            return String.Join(delimiter, parts);
+            get { return ToString("/"); }
         }
 
         public bool MatchesMask(string mask)
@@ -104,7 +99,12 @@ namespace StatisticsCollector.Common
 
         public override string ToString()
         {
-            return DelimitedBy("/");
+            return ToString("/");
+        }
+
+        public string ToString(string delimiter)
+        {
+            return String.Join(delimiter, parts);
         }
     }
 }

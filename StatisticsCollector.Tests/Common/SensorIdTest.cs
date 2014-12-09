@@ -33,7 +33,7 @@ namespace StatisticsCollector.Tests.Common
         [TestMethod]
         public void SensorId_DelimitedBy_ContainsParts()
         {
-            Assert.AreEqual("erlangen+heizung+temperatur", sensorId.DelimitedBy("+"));
+            Assert.AreEqual("erlangen+heizung+temperatur", sensorId.ToString("+"));
         }
 
         [TestMethod]

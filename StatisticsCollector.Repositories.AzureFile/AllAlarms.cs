@@ -43,7 +43,7 @@ namespace StatisticsCollector.Repositories.AzureFile
         private CloudFile BuildCloudFile(SensorId sensorId)
         {
             var filename = String
-                .Join("-", sensorId.DelimitedBy("-"), "alarm")
+                .Join("-", sensorId.ToString("-"), "alarm")
                 .ToLower() + ".json";
 
             return Cloud.File(filename);
