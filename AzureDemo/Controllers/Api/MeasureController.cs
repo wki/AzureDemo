@@ -40,7 +40,7 @@ namespace AzureDemo.Controllers.Api
         // curl.exec -vXPOST http://localhost:49461/sensor/er/heiz/temp -d value=12
         [Route("{location}/{part}/{measure}")]
         [HttpPost]
-        public async Task<IHttpActionResult> SaveResult(string location, string part, string measure, PostValue postValue)
+        public IHttpActionResult SaveResult(string location, string part, string measure, PostValue postValue)
         {
             var sensorName = String.Join("/", location, part, measure);
             Trace.TraceInformation("Sensor {0} provides result {1}", sensorName, postValue.Value);
@@ -51,7 +51,7 @@ namespace AzureDemo.Controllers.Api
 
         [Route("sendmail")]
         [HttpGet]
-        public async Task<IHttpActionResult> SendMail()
+        public IHttpActionResult SendMail()
         {
             var message = new MailMessage(
                 from: "wolfgang@kinkeldei.de",

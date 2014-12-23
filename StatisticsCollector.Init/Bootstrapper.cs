@@ -3,6 +3,7 @@ using Castle.Windsor;
 using DddSkeleton.Domain;
 using DddSkeleton.EventBus;
 using System;
+using System.Diagnostics;
 
 // we are using the main namespace to have a shorter Initialization line.
 namespace StatisticsCollector
@@ -32,7 +33,11 @@ namespace StatisticsCollector
         private static void RegisterDomain(IWindsorContainer container)
         {
             // before we had: .RelativeSearchPath -- failed sometimes
-            var dir = new AssemblyFilter(AppDomain.CurrentDomain.BaseDirectory);
+            // standalone app seems to need BaseDirectory, Web App needs Relative Search Path
+            // Console.WriteLine("Base Directory: {0}", AppDomain.CurrentDomain.BaseDirectory);
+            // Console.WriteLine("Relative Search Path: {0}", AppDomain.CurrentDomain.RelativeSearchPath);
+
+            var dir = new AssemblyFilter(AppDomain.CurrentDomain.RelativeSearchPath ?? AppDomain.CurrentDomain.BaseDirectory);
 
             container.Register(Classes
                 .FromAssemblyInDirectory(dir)
