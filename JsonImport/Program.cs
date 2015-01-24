@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Practices.Unity;
+using Newtonsoft.Json;
+using StatisticsCollector;
 using StatisticsCollector.Common;
 using StatisticsCollector.Measure;
 using StatisticsCollector.Repositories.LocalFile;
@@ -28,6 +30,7 @@ namespace JsonImport
 
     public class Program
     {
+        static IUnityContainer container;
         static Dictionary<int, SensorId> Sensors;
         static List<MeasureImport> Measurements;
 
@@ -36,11 +39,14 @@ namespace JsonImport
 
         static void Main(string[] args)
         {
-            Bootstrapper.Initialize();
+            container = new UnityContainer();
 
-            LoadSensors();
-            LoadMeasures();
-            SaveMeasures();
+              Domain.Initialize(container);
+            Domain.PrintRegistrations(container);
+
+            //LoadSensors();
+            //LoadMeasures();
+            //SaveMeasures();
         }
 
         // {
@@ -100,9 +106,9 @@ namespace JsonImport
             var total = Measurements.Count(m => m.sensor_id == id);
             var nextReport = DateTime.UtcNow.AddSeconds(10);
 
-            var sensorCreator = Bootstrapper.container.Resolve<ISensorCreator>();
-            var allSensors = Bootstrapper.container.Resolve<IAllSensors>();
-            var allSummaries = (AllSummaries) Bootstrapper.container.Resolve<IAllSummaries>();
+            var sensorCreator = container.Resolve<ISensorCreator>();
+            var allSensors = container.Resolve<IAllSensors>();
+            var allSummaries = (AllSummaries) container.Resolve<IAllSummaries>();
             var sensor = sensorCreator.CreateSensor(sensorId);
 
             Measurements

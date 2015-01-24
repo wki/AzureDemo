@@ -1,11 +1,8 @@
-﻿using Castle.MicroKernel.Registration;
-using Castle.Windsor;
-using Castle.Windsor.Mvc;
+﻿using Microsoft.Practices.Unity;
 using System.Diagnostics;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Mvc;
-using WebApiContrib.IoC.CastleWindsor;
 
 namespace AzureDemo
 {
@@ -13,34 +10,21 @@ namespace AzureDemo
     {
         public static IWindsorContainer Initialize()
         {
-            var container = new WindsorContainer();
+            var container = new UnityContainer();
 
             StatisticsCollector.Domain.Initialize(container);
 
             RegisterControllers(container);
             RegisterWebApi(container);
 
-            printRegistrations(container);
+            StatisticsCollector.Domain.PrintRegistrations(container);
+
+            // printRegistrations(container);
 
             return container;
         }
 
-        private static void printRegistrations(IWindsorContainer container)
-        {
-            Trace.TraceInformation("Registrations:");
-            foreach (var handler in container.Kernel.GetAssignableHandlers(typeof(object)))
-            {
-                foreach (var service_name in handler.ComponentModel.Services.OrderBy(s => s.Name))
-                {
-                    Trace.TraceInformation("Service: {0} Name: {1}, Implemented By {2}",
-                        service_name,
-                        handler.ComponentModel.Name,
-                        handler.ComponentModel.Implementation);
-                }
-            }
-        }
-
-        private static void RegisterControllers(IWindsorContainer container)
+        private static void RegisterControllers(IUnity container)
         {
             var factory = new WindsorControllerFactory(container.Kernel);
             ControllerBuilder.Current.SetControllerFactory(factory);
@@ -52,7 +36,7 @@ namespace AzureDemo
             );
         }
 
-        private static void RegisterWebApi(IWindsorContainer container)
+        private static void RegisterWebApi(IUnityContainer container)
         {
             GlobalConfiguration.Configuration.DependencyResolver = new WindsorResolver(container);
 

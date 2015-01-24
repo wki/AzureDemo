@@ -1,5 +1,5 @@
-﻿using Castle.Windsor;
-using Common.Logging;
+﻿using Common.Logging;
+using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +13,12 @@ namespace AzureDemo
 {
     public class MvcApplication : HttpApplication
     {
-        private static IWindsorContainer container;
+        private static IUnityContainer container;
         private static ILog Log = LogManager.GetCurrentClassLogger();
 
         private static void BootstrapContainer()
         {
-            Log.Info("initiating Windsor container");
+            Log.Info("initiating Unity container");
             if (container == null)
             {
                 container = Bootstrapper.Initialize();

@@ -33,11 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core">
-      <HintPath>..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Windsor">
-      <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -59,14 +62,6 @@
     <ProjectReference Include="..\DddSkeleton\DddSkeleton.csproj">
       <Project>{457dd21b-649f-43de-b6a3-164f5314edef}</Project>
       <Name>DddSkeleton</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StatisticsCollector.Repositories.AzureFile\StatisticsCollector.Repositories.AzureFile.csproj">
-      <Project>{2ffbb456-6c92-4f04-8525-b03d82943901}</Project>
-      <Name>StatisticsCollector.Repositories.AzureFile</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StatisticsCollector\StatisticsCollector.csproj">
-      <Project>{d12631d2-2e5b-4fae-959b-e9433fb1d21a}</Project>
-      <Name>StatisticsCollector</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

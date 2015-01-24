@@ -1,4 +1,4 @@
-﻿using Castle.Windsor;
+﻿using Microsoft.Practices.Unity;
 using Common.Logging;
 using System.Linq;
 using System.Reflection;
@@ -17,12 +17,12 @@ namespace DddSkeleton.EventBus
     public class Hub : IHub
     {
         public static ILog Log = LogManager.GetCurrentClassLogger();
-        private readonly IWindsorContainer container;
+        private readonly IUnityContainer container;
 
         // tests must be able to set it.
         public static IHub Current { get; set; }
 
-        public Hub(IWindsorContainer container)
+        public Hub(IUnityContainer container)
         {
             // maybe we should die if Current is already set.
             Current = this;
