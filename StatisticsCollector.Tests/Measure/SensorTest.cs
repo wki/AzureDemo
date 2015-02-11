@@ -1,4 +1,4 @@
-﻿using DddSkeleton.EventBus;
+﻿using Wki.DDD.EventBus;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StatisticsCollector.Common;
 using StatisticsCollector.Measure;

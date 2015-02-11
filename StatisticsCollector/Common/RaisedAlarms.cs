@@ -1,5 +1,4 @@
-﻿using StatisticsCollector.Common;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace StatisticsCollector.Common

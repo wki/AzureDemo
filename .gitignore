@@ -213,3 +213,8 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+
+
+hiddenSettings.config
+HourlyAlarmCheck/App.*.config
+StatisticsCollector.Repositories.AzureFile.Tests/app.config

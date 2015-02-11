@@ -37,6 +37,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>..\packages\Common.Logging.3.0.0\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Data.Edm">
       <HintPath>..\packages\Microsoft.Data.Edm.5.6.2\lib\net40\Microsoft.Data.Edm.dll</HintPath>
     </Reference>
@@ -61,6 +68,9 @@
     <Reference Include="System.Spatial">
       <HintPath>..\packages\System.Spatial.5.6.2\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
+    <Reference Include="Wki.DDD">
+      <HintPath>..\packages\Wki.DDD.1.0.4.0\lib\net45\Wki.DDD.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -82,10 +92,6 @@
     <Compile Include="AllSummariesTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DddSkeleton\DddSkeleton.csproj">
-      <Project>{457dd21b-649f-43de-b6a3-164f5314edef}</Project>
-      <Name>DddSkeleton</Name>
-    </ProjectReference>
     <ProjectReference Include="..\StatisticsCollector.Repositories.AzureFile\StatisticsCollector.Repositories.AzureFile.csproj">
       <Project>{2ffbb456-6c92-4f04-8525-b03d82943901}</Project>
       <Name>StatisticsCollector.Repositories.AzureFile</Name>

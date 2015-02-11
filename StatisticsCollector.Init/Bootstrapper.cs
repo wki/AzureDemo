@@ -1,9 +1,8 @@
-﻿using DddSkeleton.Domain;
-using DddSkeleton.EventBus;
-using Microsoft.Practices.Unity;
-// using StatisticsCollector;
+﻿using Microsoft.Practices.Unity;
 using System;
 using System.Linq;
+using Wki.DDD.Domain;
+using Wki.DDD.EventBus;
 
 // we are using the main namespace to have a shorter Initialization line.
 namespace StatisticsCollector
@@ -13,61 +12,50 @@ namespace StatisticsCollector
     /// outside the MVC app
     /// </summary>
     /// <example>
-    /// var container = new UnityContainer();
-    /// StatisticsCollector.Domain.Initialize(container);
+    /// var unity = new UnityContainer();
+    /// StatisticsCollector.Domain.Initialize(unity);
     /// </example>
     public static class Domain
     {
-        public static void Initialize(IUnityContainer container)
+        private static IContainer container;
+
+        public static void Initialize(IUnityContainer unity)
         {
-            RegisterInfrastructure(container);
-            RegisterDomain(container);
+            container = new StatisticsUnityContainer(unity);
+            RegisterInfrastructure(unity);
+            RegisterDomain(unity);
         }
 
-        private static void RegisterInfrastructure(IUnityContainer container)
+        private static void RegisterInfrastructure(IUnityContainer unity)
         {
             // return value is not of interest. Hub remains instantiated.
             new Hub(container);
         }
 
-        private static void RegisterDomain(IUnityContainer container)
+        private static void RegisterDomain(IUnityContainer unity)
         {
-            //// before we had: .RelativeSearchPath -- failed sometimes
-            //var dir = new AssemblyFilter(AppDomain.CurrentDomain.BaseDirectory);
-
-            //container.Register(Classes
-            //    .FromAssemblyInDirectory(dir)
-            //    .BasedOn(typeof(IFactory), typeof(IRepository), typeof(IService))
-            //    .WithService.AllInterfaces()
-            //);
-
-            //container.Register(Classes
-            //    .FromAssemblyInDirectory(dir)
-            //    .BasedOn<ISubscribe<IEvent>>()
-            //    .WithService.AllInterfaces()
-            //    .Configure(c => c.Named("EventHandler:" + c.Implementation.FullName))
-            //);
-
-            container
+            unity
                 .RegisterTypes(
-                    AllClasses.FromAssembliesInBasePath()
+                    // AllClasses.FromAssembliesInBasePath()
+                    AllClasses.FromLoadedAssemblies()
                         .Where(t => typeof(IFactory).IsAssignableFrom(t)
                                  || typeof(IRepository).IsAssignableFrom(t)
                                  || typeof(IService).IsAssignableFrom(t)),
                     WithMappings.FromMatchingInterface,
                     WithName.Default
                 )
-                // event handlers do not work like this.
+
+                // event handlers do not work like this. TODO: fix!
                 .RegisterTypes(
-                    AllClasses.FromAssembliesInBasePath()
+                    // AllClasses.FromAssembliesInBasePath()
+                    AllClasses.FromLoadedAssemblies()
                         // NO: .Where(t => t is ISubscribe<IEvent>)
                         .Where(t => t.Name == "SummaryAggregator")
                         .Where(t => 
                             { 
                                 Console.WriteLine(String.Join(", ", t.GetInterfaces().Select(i => i.Name)));
                                 return t.GetInterfaces().Any(i => i.Name.StartsWith("ISubscribe"));
-                            })
-                        ,
+                            }),
                     WithMappings.FromAllInterfaces,
                     EventHandlerName
                 )
@@ -79,12 +67,12 @@ namespace StatisticsCollector
             return "EventHandler: " + type.FullName;
         }
 
-        public static void PrintRegistrations(IUnityContainer container)
+        public static void PrintRegistrations(IUnityContainer unity)
         {
             string regName, regType, mapTo, lifetime;
             Console.WriteLine("Container has {0} Registrations:",
-                    container.Registrations.Count());
-            foreach (ContainerRegistration item in container.Registrations)
+                    unity.Registrations.Count());
+            foreach (ContainerRegistration item in unity.Registrations)
             {
                 regType = item.RegisteredType.Name;
                 if (item.RegisteredType.IsGenericType)

@@ -1,4 +1,4 @@
-﻿using DddSkeleton.EventBus;
+﻿using Wki.DDD.EventBus;
 
 namespace StatisticsCollector.Tests
 {
@@ -10,7 +10,7 @@ namespace StatisticsCollector.Tests
 
         public FakeHub()
         {
-            Hub.Current = this;
+            // Hub.Current = this;
             NoMessagesPublished = 0;
         }
 

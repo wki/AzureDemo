@@ -1,4 +1,4 @@
-﻿using DddSkeleton.Domain;
+﻿using Wki.DDD.Domain;
 using Microsoft.WindowsAzure.Storage.File;
 using Newtonsoft.Json;
 using StatisticsCollector.Alarms;

@@ -1,4 +1,4 @@
-﻿using DddSkeleton.Domain;
+﻿using Wki.DDD.Domain;
 using Newtonsoft.Json;
 using StatisticsCollector.Common;
 using StatisticsCollector.Measure;

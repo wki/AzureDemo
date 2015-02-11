@@ -1,5 +1,5 @@
-﻿using DddSkeleton.Domain;
-using DddSkeleton.EventBus;
+﻿using Wki.DDD.Domain;
+using Wki.DDD.EventBus;
 using StatisticsCollector.Measure;
 
 namespace StatisticsCollector.App

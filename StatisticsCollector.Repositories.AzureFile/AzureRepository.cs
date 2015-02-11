@@ -12,7 +12,7 @@ namespace StatisticsCollector.Repositories.AzureFile
         protected JsonSerializerSettings jsonSerializerSettings;
         
         public AzureRepository ()
-	    {
+        {
             jsonSerializerSettings = new JsonSerializerSettings();
             jsonSerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
             jsonSerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;

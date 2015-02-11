@@ -1,11 +1,7 @@
-﻿using DddSkeleton.Domain;
+﻿using Wki.DDD.Domain;
 using StatisticsCollector.Alarms;
 using StatisticsCollector.Measure;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StatisticsCollector.App
 {

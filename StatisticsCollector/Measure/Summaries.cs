@@ -1,4 +1,4 @@
-﻿using DddSkeleton.Domain;
+﻿using Wki.DDD.Domain;
 using StatisticsCollector.Common;
 using System;
 using System.Collections.Generic;

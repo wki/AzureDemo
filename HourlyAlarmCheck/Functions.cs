@@ -1,6 +1,4 @@
-﻿using Castle.MicroKernel.Registration;
-using Castle.Windsor;
-using StatisticsCollector;
+﻿using StatisticsCollector;
 using StatisticsCollector.Common;
 using StatisticsCollector.Measure;
 using System;
@@ -10,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
+using Microsoft.Practices.Unity;
 using System.Threading;
 using StatisticsCollector.App;
 
@@ -17,11 +16,11 @@ namespace HourlyAlarmCheck
 {
     public class Functions
     {
-        static IWindsorContainer container;
+        static IUnityContainer container;
 
         static Functions()
         {
-            container = new WindsorContainer();
+            container = new UnityContainer();
             StatisticsCollector.Domain.Initialize(container);
         }
 
