@@ -1,6 +1,9 @@
-﻿using Microsoft.Practices.Unity;
+﻿using Common.Logging;
+using Microsoft.Practices.Unity;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Wki.DDD.Domain;
 using Wki.DDD.EventBus;
 
@@ -17,6 +20,7 @@ namespace StatisticsCollector
     /// </example>
     public static class Domain
     {
+        private static ILog log = LogManager.GetCurrentClassLogger();
         private static IContainer container;
 
         public static void Initialize(IUnityContainer unity)
@@ -24,20 +28,28 @@ namespace StatisticsCollector
             container = new StatisticsUnityContainer(unity);
             RegisterInfrastructure(unity);
             RegisterDomain(unity);
+
+            PrintRegistrations(unity);
         }
 
         private static void RegisterInfrastructure(IUnityContainer unity)
         {
+            log.Debug("Register Infrastructure");
+
             // return value is not of interest. Hub remains instantiated.
             new Hub(container);
         }
 
         private static void RegisterDomain(IUnityContainer unity)
         {
+            log.Debug("Register Domain");
+
+            var allAssemblies = GetAllAssemblies();
+            log.Debug(m => m("Found Assemblies: {0}", String.Join(", ", allAssemblies.Select(a => a.FullName))));
+
             unity
                 .RegisterTypes(
-                    // AllClasses.FromAssembliesInBasePath()
-                    AllClasses.FromLoadedAssemblies()
+                    AllClasses.FromAssemblies(allAssemblies)
                         .Where(t => typeof(IFactory).IsAssignableFrom(t)
                                  || typeof(IRepository).IsAssignableFrom(t)
                                  || typeof(IService).IsAssignableFrom(t)),
@@ -47,10 +59,9 @@ namespace StatisticsCollector
 
                 // event handlers do not work like this. TODO: fix!
                 .RegisterTypes(
-                    // AllClasses.FromAssembliesInBasePath()
-                    AllClasses.FromLoadedAssemblies()
+                    AllClasses.FromAssemblies(allAssemblies)
                         // NO: .Where(t => t is ISubscribe<IEvent>)
-                        .Where(t => t.Name == "SummaryAggregator")
+                        // TEST ONLY: .Where(t => t.Name == "SummaryAggregator")
                         .Where(t => 
                             { 
                                 Console.WriteLine(String.Join(", ", t.GetInterfaces().Select(i => i.Name)));
@@ -70,8 +81,8 @@ namespace StatisticsCollector
         public static void PrintRegistrations(IUnityContainer unity)
         {
             string regName, regType, mapTo, lifetime;
-            Console.WriteLine("Container has {0} Registrations:",
-                    unity.Registrations.Count());
+            log.Debug(m => m("Container has {0} Registrations:", unity.Registrations.Count()));
+
             foreach (ContainerRegistration item in unity.Registrations)
             {
                 regType = item.RegisteredType.Name;
@@ -93,8 +104,28 @@ namespace StatisticsCollector
                     mapTo = string.Empty;
                 }
                 lifetime = lifetime.Substring(0, lifetime.Length - "LifetimeManager".Length);
-                Console.WriteLine("+ {0}{1}  '{2}'  {3}", regType, mapTo, regName, lifetime);
+                log.Debug(m => m("+ {0}{1}  '{2}'  {3}", regType, mapTo, regName, lifetime));
             }
+        }
+
+        public static string GetAssemblyDirectory()
+        {
+            var codeBase = Assembly.GetCallingAssembly().CodeBase;
+            var uri = new UriBuilder(codeBase);
+            var path = Uri.UnescapeDataString(uri.Path);
+
+            return System.IO.Path.GetDirectoryName(path);
+        }
+
+        public static IList<Assembly> GetAllAssemblies()
+        {
+            var directory = GetAssemblyDirectory();
+            log.Debug(m => m("Collecting Assemblies in: {0}", directory));
+
+            return System.IO.Directory.EnumerateFiles(directory)
+                .Where(f => System.IO.Path.GetFileName(f).ToLower().EndsWith(".dll"))
+                .Select(f => Assembly.LoadFrom(f))
+                .ToList();
         }
     }
 }
