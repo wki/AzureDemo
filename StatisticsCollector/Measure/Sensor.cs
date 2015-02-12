@@ -32,7 +32,7 @@ namespace StatisticsCollector.Measure
         {
             LatestMeasurement = measurement;
 
-            this.Publish(
+            Publish(
                 new MeasurementProvided
                 {
                     SensorId = Id,

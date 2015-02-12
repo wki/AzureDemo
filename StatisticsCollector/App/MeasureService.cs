@@ -1,12 +1,15 @@
-﻿using Wki.DDD.Domain;
+﻿using Common.Logging;
 using StatisticsCollector.Common;
 using StatisticsCollector.Measure;
 using System.Collections.Generic;
+using Wki.DDD.Domain;
+using Wki.DDD.EventBus;
 
 namespace StatisticsCollector.App
 {
     public class MeasureService : IMeasureService, IService
     {
+        private ILog log = LogManager.GetCurrentClassLogger();
         private IAllSensors AllSensors { get; set; }
         private ISensorCreator SensorCreator { get; set; }
         private IAllSummaries AllSummaries { get; set; }

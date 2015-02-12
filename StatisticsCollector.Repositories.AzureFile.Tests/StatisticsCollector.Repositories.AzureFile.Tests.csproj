@@ -68,8 +68,9 @@
     <Reference Include="System.Spatial">
       <HintPath>..\packages\System.Spatial.5.6.2\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
-    <Reference Include="Wki.DDD">
-      <HintPath>..\packages\Wki.DDD.1.0.4.0\lib\net45\Wki.DDD.dll</HintPath>
+    <Reference Include="Wki.DDD, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Wki.DDD.1.0.6.0\lib\net45\Wki.DDD.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Choose>

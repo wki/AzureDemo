@@ -45,7 +45,7 @@ namespace StatisticsCollector
             log.Debug("Register Domain");
 
             var allAssemblies = GetAllAssemblies();
-            log.Debug(m => m("Found Assemblies: {0}", String.Join(", ", allAssemblies.Select(a => a.FullName))));
+            log.Debug(m => m("Found Assemblies: {0}", String.Join(", ", allAssemblies.Select(a => a.GetName().Name))));
 
             unity
                 .RegisterTypes(
@@ -57,25 +57,12 @@ namespace StatisticsCollector
                     WithName.Default
                 )
 
-                // event handlers do not work like this. TODO: fix!
                 .RegisterTypes(
                     AllClasses.FromAssemblies(allAssemblies)
-                        // NO: .Where(t => t is ISubscribe<IEvent>)
-                        // TEST ONLY: .Where(t => t.Name == "SummaryAggregator")
-                        .Where(t => 
-                            { 
-                                Console.WriteLine(String.Join(", ", t.GetInterfaces().Select(i => i.Name)));
-                                return t.GetInterfaces().Any(i => i.Name.StartsWith("ISubscribe"));
-                            }),
+                        .Where(t => t.GetInterfaces().Any(i => i.Name.StartsWith("ISubscribe"))),
                     WithMappings.FromAllInterfaces,
-                    EventHandlerName
-                )
-                ;
-        }
-
-        public static string EventHandlerName(Type type)
-        {
-            return "EventHandler: " + type.FullName;
+                    t => "EventHandler: " + t.FullName
+                );
         }
 
         public static void PrintRegistrations(IUnityContainer unity)

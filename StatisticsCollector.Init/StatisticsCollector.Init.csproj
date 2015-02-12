@@ -56,9 +56,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Wki.DDD, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Wki.DDD, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Wki.DDD.1.0.4.0\lib\net45\Wki.DDD.dll</HintPath>
+      <HintPath>..\packages\Wki.DDD.1.0.6.0\lib\net45\Wki.DDD.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
