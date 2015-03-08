@@ -16,6 +16,7 @@ namespace StatisticsCollector.Repositories.AzureFile
             jsonSerializerSettings = new JsonSerializerSettings();
             jsonSerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
             jsonSerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+            jsonSerializerSettings.CheckAdditionalContent = false; 
         }
 
         #region Alarms

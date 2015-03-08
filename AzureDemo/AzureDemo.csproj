@@ -217,6 +217,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config" />
     <Content Include="hiddenSettings.config" />
+    <None Include="Properties\PublishProfiles\statisticscollector %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\statisticscollector.pubxml" />
     <Content Include="Scripts\bootstrap.min.js.map">
       <DependentUpon>bootstrap.min.js</DependentUpon>
